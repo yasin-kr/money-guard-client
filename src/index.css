@@ -1,0 +1,104 @@
+:root {
+  --white: #fbfbfb;
+  --ink: #ffffff;
+  --muted: rgba(255, 255, 255, 0.58);
+  --line: rgba(255, 255, 255, 0.24);
+  --violet-950: #150a3d;
+  --violet-900: #231052;
+  --violet-700: #4f32b6;
+  --violet-600: #6542c9;
+  --violet-500: #7b49ed;
+  --pink: #c653bb;
+  --coral: #ff7f7f;
+  --gold: #ffb627;
+  --orange: #f4ad4c;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--ink);
+  background: #f3f3f3;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+main {
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+img,
+picture,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+input,
+textarea,
+select {
+  color: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+#root {
+  min-height: 100vh;
+}

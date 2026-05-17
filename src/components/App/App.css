@@ -1,0 +1,626 @@
+.authPage,
+.appShell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(127, 77, 236, 0.42), transparent 32%),
+    linear-gradient(150deg, #26104f 0%, #4e31ae 48%, #6e5385 100%);
+}
+
+.authPage {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.authPanel {
+  width: min(100%, 320px);
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 48px;
+  padding: 28px 20px;
+  background:
+    radial-gradient(circle at 28% 82%, rgba(13, 10, 35, 0.72), transparent 36%),
+    linear-gradient(160deg, #6140af 0%, #39217b 55%, #65419d 100%);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.logoMark {
+  position: relative;
+  width: 22px;
+  height: 25px;
+  display: inline-grid;
+  place-items: center;
+}
+
+.logoMark span {
+  position: absolute;
+  width: 8px;
+  height: 16px;
+  border-radius: 2px 2px 7px 7px;
+  background: #fff;
+  transform: rotate(-38deg);
+}
+
+.logoMark span:nth-child(1) {
+  left: 2px;
+  bottom: 2px;
+}
+
+.logoMark span:nth-child(2) {
+  left: 8px;
+  bottom: 5px;
+}
+
+.logoMark span:nth-child(3) {
+  right: 2px;
+  bottom: 9px;
+  background: #ffce31;
+}
+
+.form,
+.transactionForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inputLine,
+.plainLine,
+.dateLine,
+.selectLine {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.inputLine svg,
+.dateLine svg,
+.selectLine svg {
+  flex: 0 0 auto;
+  font-size: 22px;
+}
+
+.inputLine input,
+.plainLine input,
+.dateLine input,
+.selectLine select,
+.plainLine textarea {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: #fff;
+  background: transparent;
+  padding: 10px 0 12px;
+  font-size: 20px;
+}
+
+.plainLine textarea {
+  min-height: 82px;
+  resize: vertical;
+}
+
+.inputLine input::placeholder,
+.plainLine input::placeholder,
+.plainLine textarea::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.fieldError,
+.formError {
+  position: absolute;
+  left: 0;
+  bottom: -18px;
+  color: #ffb0a7;
+  font-size: 12px;
+}
+
+.formError {
+  position: static;
+  margin: 0;
+  text-align: center;
+}
+
+.progress {
+  height: 5px;
+  margin-top: -22px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.54);
+  overflow: hidden;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ffb627, #ffcf55);
+}
+
+.button {
+  min-height: 50px;
+  border: 0;
+  border-radius: 20px;
+  color: #fff;
+  background: linear-gradient(90deg, var(--orange), #b643c0);
+  box-shadow: 0 8px 18px rgba(32, 17, 61, 0.25);
+  letter-spacing: 0.14em;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    opacity 160ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(32, 17, 61, 0.28);
+}
+
+.button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
+.button-secondary {
+  color: #5b3b8f;
+  background: #fff;
+}
+
+.button-mini {
+  min-height: 31px;
+  padding: 0 12px;
+  border-radius: 18px;
+  letter-spacing: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.appShell {
+  max-width: 420px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: rgba(31, 13, 70, 0.86);
+  box-shadow: 0 4px 14px rgba(16, 6, 41, 0.18);
+}
+
+.header .logo {
+  font-size: 14px;
+}
+
+.header .logoMark {
+  transform: scale(0.72);
+}
+
+.userBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.iconBtn,
+.editBtn {
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav {
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  background: linear-gradient(180deg, rgba(107, 57, 188, 0.82), rgba(32, 13, 80, 0.5));
+}
+
+.nav a {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  color: #2c2257;
+  background: rgba(255, 255, 255, 0.55);
+  font-size: 28px;
+}
+
+.nav a.active {
+  color: #fff;
+  background: #734aef;
+  box-shadow: 0 0 18px rgba(115, 74, 239, 0.95);
+}
+
+.pageContent {
+  padding: 22px 20px 92px;
+}
+
+.homeGrid {
+  display: grid;
+  gap: 30px;
+}
+
+.balance {
+  padding: 18px 30px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.balance span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.balance strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 31px;
+  letter-spacing: 0;
+}
+
+.transactionsList {
+  display: grid;
+  gap: 12px;
+}
+
+.transactionCard {
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-left: 5px solid var(--coral);
+}
+
+.transactionCard.income {
+  border-left-color: var(--gold);
+}
+
+.infoRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 13px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.infoRow span {
+  text-align: right;
+}
+
+.sumIncome,
+.activeIncome {
+  color: var(--gold);
+}
+
+.sumExpense,
+.activeExpense {
+  color: var(--coral);
+}
+
+.cardActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+}
+
+.addBtn {
+  position: fixed;
+  right: calc(50% - 188px);
+  bottom: 24px;
+  width: 50px;
+  height: 50px;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, #ffb627, #c04bbd);
+  box-shadow: 0 6px 14px rgba(29, 16, 56, 0.34);
+  font-size: 30px;
+}
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  background: rgba(20, 8, 48, 0.28);
+}
+
+.modalPanel,
+.logoutPanel {
+  width: min(100%, 420px);
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 38px 20px;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(127, 77, 236, 0.28), transparent 30%),
+    linear-gradient(155deg, #5b3dbc 0%, #4f32b6 45%, #725d89 100%);
+}
+
+.transactionForm h1,
+.statistics h1 {
+  margin: 0 0 6px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.typeSwitch {
+  display: grid;
+  grid-template-columns: 1fr 76px 1fr;
+  align-items: center;
+  gap: 18px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.typeSwitch span:first-child {
+  text-align: right;
+}
+
+.typeSwitch button {
+  width: 76px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: #fff;
+  position: relative;
+  font-size: 28px;
+}
+
+.typeSwitch button::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -2px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ffb627;
+  box-shadow: 0 6px 16px rgba(255, 182, 39, 0.5);
+}
+
+.typeSwitch button.expenseToggle::before {
+  left: 26px;
+  background: var(--coral);
+  box-shadow: 0 6px 16px rgba(255, 127, 127, 0.5);
+}
+
+.typeSwitch svg,
+.typeSwitch button {
+  z-index: 1;
+}
+
+.selectLine select {
+  appearance: none;
+  color: var(--muted);
+}
+
+.selectLine option {
+  color: #fff;
+  background: #6440b2;
+}
+
+.dateLine .react-datepicker-wrapper {
+  width: 100%;
+}
+
+.statistics {
+  display: grid;
+  gap: 12px;
+}
+
+.chartWrap {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.chartWrap canvas,
+.chartWrap strong,
+.emptyChart {
+  grid-area: 1 / 1;
+}
+
+.emptyChart {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: conic-gradient(#fed057, #ffd8d0, #ff7f7f, #bca9ff, #6e78ff, #00c7a4, #fed057);
+  mask: radial-gradient(circle, transparent 60%, #000 61%);
+}
+
+.filters {
+  display: grid;
+  gap: 12px;
+}
+
+.filters select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: #fff;
+  background: rgba(91, 58, 166, 0.46);
+}
+
+.statsTable,
+.currencyTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.statsTable th,
+.statsTable td,
+.currencyTable th,
+.currencyTable td {
+  padding: 13px 10px;
+  text-align: left;
+}
+
+.statsTable thead,
+.currencyTable thead {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.statsTable td:last-child,
+.statsTable th:last-child,
+.currencyTable td:not(:first-child),
+.currencyTable th:not(:first-child) {
+  text-align: right;
+}
+
+.statsTable td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  font-size: 13px;
+}
+
+.statsTable span {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 10px;
+  vertical-align: -2px;
+}
+
+.totals {
+  display: grid;
+  gap: 12px;
+  padding: 12px 10px;
+  font-size: 13px;
+}
+
+.currency {
+  padding-inline: 0;
+}
+
+.currencyTable {
+  font-size: 17px;
+}
+
+.currencyTable th,
+.currencyTable td {
+  padding-inline: 20px;
+}
+
+.currencyGraph {
+  height: 160px;
+  margin-top: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0)),
+    linear-gradient(160deg, transparent 38%, rgba(255, 127, 127, 0.95) 39%, transparent 41%),
+    radial-gradient(ellipse at 40% 10%, rgba(255, 255, 255, 0.28), transparent 42%);
+  clip-path: polygon(0 40%, 15% 25%, 32% 58%, 52% 20%, 68% 5%, 84% 25%, 100% 18%, 100% 100%, 0 100%);
+}
+
+.logoutPanel {
+  min-height: 520px;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.empty {
+  color: var(--muted);
+  text-align: center;
+}
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: rgba(23, 10, 54, 0.35);
+}
+
+.loader span {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.28);
+  border-top-color: #ffb627;
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .appShell {
+    max-width: 960px;
+  }
+
+  .pageContent {
+    padding-inline: 36px;
+  }
+
+  .homeGrid {
+    grid-template-columns: 300px 1fr;
+    align-items: start;
+  }
+
+  .transactionsList {
+    max-height: 620px;
+    overflow-y: auto;
+  }
+
+  .modalPanel,
+  .logoutPanel {
+    min-height: auto;
+    border-radius: 8px;
+  }
+
+  .statistics {
+    grid-template-columns: 310px 1fr;
+    align-items: start;
+  }
+
+  .statistics h1 {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  .filters,
+  .statsTable,
+  .totals {
+    grid-column: 2;
+  }
+}
