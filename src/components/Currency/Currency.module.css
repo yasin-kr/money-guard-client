@@ -1,0 +1,114 @@
+.currencyWrapper {
+  position: relative;
+  background: rgba(74, 54, 110, 0.3); /* Yarı saydam arka plan */
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border-radius: 0px 0px 16px 16px; /* Alt köşeleri yuvarlatılmış */
+  width: 100%;
+  max-width: 320px;
+  height: 182px; /* Figma standart yüksekliği */
+  overflow: hidden;
+  box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.currencyTable {
+  width: 100%;
+  border-collapse: collapse;
+  z-index: 2; /* Grafiğin üstünde kalması için */
+}
+
+.currencyHeader {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.2); /* Başlık panelinin hafif açık rengi */
+  padding: 12px 30px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.currencyHeader span {
+  width: 33%;
+  text-align: center;
+}
+
+.currencyHeader span:first-child {
+  text-align: left;
+}
+
+.currencyHeader span:last-child {
+  text-align: right;
+}
+
+.tableBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 30px;
+}
+
+.currencyRow {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.currencyRow span {
+  width: 33%;
+  text-align: center;
+}
+
+.currencyRow span:first-child {
+  text-align: left;
+}
+
+.currencyRow span:last-child {
+  text-align: right;
+}
+
+.currencyName {
+  text-transform: uppercase;
+}
+
+/* 🔥 FIGMA ALT DALGA EFEKTİ (Görsel yüklemeden saf CSS gradyanı ile dalga hissi) */
+.chartWaveDecoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 106, 179, 0.15) 100%
+  );
+  border-top: 1px dashed rgba(255, 106, 179, 0.4); /* Tasarımdaki o kesikli grafik çizgisi */
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Loader ve Hata Ortalayıcıları */
+.loaderCenter,
+.errorMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+}
+
+/* 📱 RESPONSIVE: TABLET VE MOBİL AYARLARI */
+@media (max-width: 1024px) {
+  .currencyWrapper {
+    max-width: 100%; /* Tablette yanındaki bakiye kartıyla eşit yayılması için */
+    height: 182px;
+  }
+}
