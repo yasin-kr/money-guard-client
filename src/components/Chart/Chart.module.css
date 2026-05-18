@@ -2,14 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  flex-shrink: 0;
 }
 
 .chartContainer {
   position: relative;
-  width: 280px;
-  height: 280px;
-  flex-shrink: 0;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .centerLabel {
@@ -17,19 +19,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+  text-align: center;
   pointer-events: none;
 }
 
 .totalAmount {
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--ink);
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   white-space: nowrap;
 }
 
@@ -37,31 +35,44 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  width: 280px;
-  height: 280px;
-
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   border: 5px dashed rgba(255, 255, 255, 0.2);
-
   font-size: 14px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.58);
   text-align: center;
   padding: 20px;
 }
 
 @media screen and (min-width: 768px) {
   .chartContainer {
-    width: 336px;
-    height: 336px;
+    width: 300px;
+    height: 300px;
   }
 
   .empty {
-    width: 336px;
-    height: 336px;
+    width: 300px;
+    height: 300px;
   }
 
   .totalAmount {
-    font-size: 20px;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .chartContainer {
+    width: 350px;
+    height: 350px;
+  }
+
+  .empty {
+    width: 350px;
+    height: 350px;
+  }
+
+  .totalAmount {
+    font-size: 1.5rem;
   }
 }
