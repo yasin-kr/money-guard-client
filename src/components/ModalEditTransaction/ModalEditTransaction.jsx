@@ -34,7 +34,11 @@ const ModalEditTransaction = ({ onClose, transaction }) => {
   return (
     <div className={css.backdrop} onClick={handleBackdropClick}>
       <div className={css.modal}>
-        <button type="button" className={css.closeBtn} onClick={onClose}>
+        <button
+          type="button"
+          className={css.closeBtn}
+          onClick={onClose}
+          aria-label="Close edit transaction modal">
           <MdClose />
         </button>
 
