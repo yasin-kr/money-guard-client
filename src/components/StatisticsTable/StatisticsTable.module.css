@@ -1,0 +1,125 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  border-radius: 16px;
+  overflow: hidden;
+
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 16px 20px;
+
+  background-color: rgba(255, 255, 255, 0.1);
+
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 12px 20px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.colorDot {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.name {
+  flex: 1;
+  font-size: 16px;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sum {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.empty {
+  padding: 24px 20px;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.totals {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  border-top: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px 20px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.totalRow:last-child {
+  border-bottom: none;
+}
+
+.totalLabel {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.expenseValue {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ff868d;
+}
+
+.incomeValue {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffb627;
+}
+
+@media screen and (min-width: 768px) {
+  .name,
+  .sum,
+  .totalLabel,
+  .expenseValue,
+  .incomeValue {
+    font-size: 18px;
+  }
+}
