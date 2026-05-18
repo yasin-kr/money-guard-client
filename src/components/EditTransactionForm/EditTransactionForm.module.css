@@ -1,0 +1,220 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  margin: 0;
+
+  text-align: center;
+
+  font-size: 32px;
+  font-weight: 600;
+
+  color: #ffffff;
+}
+
+.typeBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.typeText,
+.activeIncome,
+.activeExpense {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.typeText {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.activeIncome {
+  color: #ffb627;
+}
+
+.activeExpense {
+  color: #ff868d;
+}
+
+.divider {
+  font-size: 24px;
+
+  color: #ffffff;
+}
+
+.row {
+  display: flex;
+  gap: 32px;
+}
+
+.row .field {
+  flex: 1;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 100%;
+}
+
+.input,
+.select {
+  width: 100%;
+
+  height: 48px;
+
+  padding: 0 12px;
+
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+
+  background-color: transparent;
+
+  font-size: 18px;
+
+  color: #ffffff;
+
+  outline: none;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.select {
+  cursor: pointer;
+}
+
+.select option {
+  color: #000000;
+}
+
+.dateBox {
+  position: relative;
+
+  width: 100%;
+}
+
+.datePicker {
+  width: 100%;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+
+  height: 48px;
+
+  padding: 0 12px;
+
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+
+  background-color: transparent;
+
+  font-size: 18px;
+
+  color: #ffffff;
+
+  outline: none;
+}
+
+.calendarIcon {
+  position: absolute;
+
+  top: 50%;
+  right: 12px;
+
+  transform: translateY(-50%);
+
+  font-size: 20px;
+
+  color: #6e78e8;
+
+  pointer-events: none;
+}
+
+.error {
+  margin: 0;
+
+  font-size: 14px;
+
+  color: #ff8080;
+}
+
+.buttonBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.saveBtn,
+.cancelBtn {
+  width: 280px;
+  height: 50px;
+
+  border: none;
+  border-radius: 30px;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.saveBtn {
+  background: linear-gradient(90deg, #ffc727 0%, #9e40ba 61%, #7000ff 91%);
+
+  color: #ffffff;
+}
+
+.cancelBtn {
+  background-color: #f5f5f5;
+
+  color: #623f8b;
+}
+
+@media screen and (max-width: 767px) {
+  .row {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .input,
+  .select,
+  .react-datepicker__input-container input {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .saveBtn,
+  .cancelBtn {
+    width: 300px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .title {
+    font-size: 36px;
+  }
+}
