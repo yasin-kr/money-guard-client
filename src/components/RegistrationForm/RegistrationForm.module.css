@@ -41,7 +41,6 @@
   color: rgba(255, 255, 255, 0.4);
   width: 280px;
   height: 35px;
-
 }
 
 .inputField::placeholder {
@@ -57,24 +56,7 @@
 
 .passwordStrengthBar {
   width: 280px;
-  height: 4px; 
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
   margin-bottom: 25px;
-  /* position: relative;
-  margin-left: -12px;
-  margin-top: -8px; */
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.passwordStrengthFill {
-  transition: width 0.3s ease;
-  height: 100%;
-  background: linear-gradient(90deg, #FFA500, #FFD700); 
-  border-radius: 2px;
-  
 }
 .buttonContainer{
     display: flex;
@@ -96,8 +78,13 @@
   );
   color: white;
   border: none;
+  cursor: pointer;
 }
 
+.registerButton:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
 
 .loginLink {
   border-radius: 20px;
