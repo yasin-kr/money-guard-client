@@ -1,0 +1,75 @@
+.dashboardContainer {
+  min-height: 100vh;
+  background-color: #f1f2f7; /* Arka plan rengi projenize göre değişebilir */
+  display: flex;
+  flex-direction: column;
+}
+
+.mainWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
+  gap: 20px;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Tablet ve Masaüstü için yan yana getirme */
+@media screen and (min-width: 768px) {
+  .mainWrapper {
+    flex-direction: row;
+    padding: 40px 32px;
+    gap: 32px;
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar {
+    width: 320px; /* Sol panelin sabit genişliği */
+    flex-shrink: 0;
+  }
+}
+
+.sidebarTop {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Tablette menü ve bakiyeyi yan yana getirmek istersen */
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .sidebarTop {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.currencyWrap {
+  width: 100%;
+}
+
+/* Tablette döviz tablosunu gizlemek ya da alta almak için projeye bakılabilir */
+@media screen and (max-width: 767px) {
+  .currencyWrap {
+    display: none; /* Mobilde genelde ayrı sekme olur */
+  }
+}
+
+.contentArea {
+  flex-grow: 1;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 400px;
+}

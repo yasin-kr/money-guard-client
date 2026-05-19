@@ -1,8 +1,12 @@
-import { Currency } from "../../components/Currency/Currency";
+import Currency from '../../components/Currency/Currency';
+import styles from './CurrencyTab.module.css';
 
-// Kisi 3 - /currency
-// Kullanilacak Redux operation: fetchCurrency Currency componentinde.
-// Mobil currency sayfasi Currency componentini konumlandirir.
-export default function CurrencyTab() {
-  return <Currency />;
-}
+const CurrencyTab = () => {
+  return (
+    <div className={styles.wrapper}>
+      <Currency />
+    </div>
+  );
+};
+
+export default CurrencyTab;

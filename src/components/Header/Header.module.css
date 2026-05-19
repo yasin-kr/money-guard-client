@@ -1,0 +1,105 @@
+.header {
+  background: linear-gradient(270deg, #2e1756 0%, #160d33 100%);
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  padding: 16px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoWrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+}
+
+.logoText {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.username {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.logoutBtn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: opacity 0.3s ease;
+}
+
+.logoutBtn:hover {
+  opacity: 0.8;
+}
+
+.exitIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.exitText {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 12px 0;
+  }
+
+  .logoText {
+    font-size: 18px;
+  }
+
+  .logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .exitText {
+    display: none;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+}

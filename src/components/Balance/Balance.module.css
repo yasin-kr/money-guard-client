@@ -1,0 +1,51 @@
+.balanceCard {
+  background: rgba(82, 59, 126, 0.6);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border-radius: 16px;
+  padding: 8px 40px 12px 40px;
+  box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 320px;
+  box-sizing: border-box;
+}
+
+.label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  margin: 0;
+  padding-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.amount {
+  font-family: 'Poppins', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.currencySymbol {
+  font-weight: 400;
+}
+
+/* 📱 RESPONSIVE: MOBİL UYUMLULUK */
+@media (max-width: 768px) {
+  .balanceCard {
+    max-width: 100%;
+    padding: 8px 32px;
+    border-radius: 0px;
+    background: rgba(82, 59, 126, 0.4);
+  }
+
+  .amount {
+    font-size: 24px;
+  }
+}

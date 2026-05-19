@@ -1,18 +1,34 @@
-import { Outlet } from "react-router-dom";
-import { Header } from "../../components/Header/Header";
-import { Navigation } from "../../components/Navigation/Navigation";
-import { Balance } from "../../components/Balance/Balance";
+import { Outlet } from 'react-router-dom';
+import Header from '../../components/Header/Header';
+import Navigation from '../../components/Navigation/Navigation';
+import Balance from '../../components/Balance/Balance';
+import Currency from '../../components/Currency/Currency';
+import styles from './DashboardPage.module.css';
 
-// Kisi 3 - /dashboard layout
-// Kullanilacak componentler: Header, Navigation, Balance, Outlet.
-// Alt route'lar: /home, /statistics, /currency App icinde bu layout altinda calisir.
-export default function DashboardPage() {
+const DashboardPage = () => {
   return (
-    <>
+    <div className={styles.dashboardContainer}>
       <Header />
-      <Navigation />
-      <Balance />
-      <Outlet />
-    </>
+
+      <div className={styles.mainWrapper}>
+        {/* SOL PANEL (Sidebar) */}
+        <aside className={styles.sidebar}>
+          <div className={styles.sidebarTop}>
+            <Navigation />
+            <Balance />
+          </div>
+          <div className={styles.currencyWrap}>
+            <Currency />
+          </div>
+        </aside>
+
+        {/* SAĞ PANEL (Dinamik Sayfalar) */}
+        <main className={styles.contentArea}>
+          <Outlet />
+        </main>
+      </div>
+    </div>
   );
-}
+};
+
+export default DashboardPage;

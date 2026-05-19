@@ -1,0 +1,105 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  /* Beyaz arka planda görünmesi için rengi koyu gri/mor tonuna çektik */
+  color: #4a56a9;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  /* Hover durumunda projenin ana mor rengine yaklaşsın */
+  color: #734aef;
+  background-color: rgba(115, 74, 239, 0.05);
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  /* İkon arkasındaki hafif şeffaf kutuyu koyulaştırdık */
+  background-color: rgba(115, 74, 239, 0.1);
+  transition: all 0.3s ease;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  /* SVG ikonların rengi */
+  color: #734aef;
+  fill: #734aef;
+  transition: all 0.3s ease;
+}
+
+/* Aktif (Seçili) Menü Elemanı Stilleri */
+.activeLink {
+  font-weight: 700;
+  color: #4a56a9;
+  background-color: rgba(115, 74, 239, 0.15);
+}
+
+.activeLink .iconWrap {
+  background-color: #734aef;
+  box-shadow: 0px 3px 10px rgba(115, 74, 239, 0.4);
+}
+
+.activeLink .icon {
+  color: #ffffff;
+  fill: #ffffff;
+}
+
+.mobileCurrencyOnly {
+  display: none;
+}
+
+/* Kırılma noktasını 768px yerine 1024px yaparak tabletleri de kapsama alanına aldık kanka */
+@media (max-width: 1024px) {
+  .nav {
+    flex-direction: row;
+    justify-content: flex-start; /* Sola yaslı veya center yapabilirsin */
+    gap: 32px;
+    width: 100%;
+    padding: 12px 0;
+  }
+
+  .link {
+    padding: 8px;
+    gap: 0;
+  }
+
+  /* Tablet ve mobilde metinleri gizle, sadece ikonlar kalsın */
+  .navText {
+    display: none;
+  }
+
+  .mobileCurrencyOnly {
+    display: flex;
+  }
+
+  .iconWrap {
+    width: 44px;
+    height: 44px;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+}
