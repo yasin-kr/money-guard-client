@@ -8,6 +8,7 @@ import { refreshUser } from "../../redux/auth/operations";
 import {
   selectIsLoggedIn,
   selectIsRefreshing,
+  selectToken,
 } from "../../redux/auth/selectors";
 import { clearGlobalError } from "../../redux/global/slice";
 import { selectGlobalError } from "../../redux/global/selectors";
@@ -31,11 +32,14 @@ export default function App() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const isRefreshing = useSelector(selectIsRefreshing);
+  const token = useSelector(selectToken);
   const globalError = useSelector(selectGlobalError);
 
   useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
+    if (token) {
+      dispatch(refreshUser());
+    }
+  }, [dispatch, token]);
 
   useEffect(() => {
     if (!globalError) {

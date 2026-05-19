@@ -12,6 +12,14 @@ const COLORS = [
   "#00AD84", "#FFB627", "#FF7F7F", "#F4AD4C",
 ];
 
+function getCategoryName(category) {
+  return category.name || category.categoryName || "Other";
+}
+
+function getCategoryTotal(category) {
+  return Number(category.total ?? category.amount ?? category.sum ?? 0);
+}
+
 export function StatisticsTable() {
   const categories = useSelector(selectExpenseCategories);
   const expenseTotal = useSelector(selectExpenseTotal);
@@ -38,13 +46,15 @@ export function StatisticsTable() {
       ) : (
         <ul className={css.list}>
           {expenseCategories.map((cat, i) => (
-            <li key={cat.name} className={css.item}>
+            <li key={`${getCategoryName(cat)}-${i}`} className={css.item}>
               <span
                 className={css.colorDot}
                 style={{ backgroundColor: COLORS[i % COLORS.length] }}
               />
-              <span className={css.name}>{cat.name}</span>
-              <span className={css.sum}>{cat.total.toFixed(2)}</span>
+              <span className={css.name}>{getCategoryName(cat)}</span>
+              <span className={css.sum}>
+                {getCategoryTotal(cat).toFixed(2)}
+              </span>
             </li>
           ))}
         </ul>

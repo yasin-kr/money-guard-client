@@ -17,8 +17,17 @@ const normalizeTransactions = (payload) =>
 
 const calculateBalance = (transactions) =>
   transactions.reduce((total, transaction) => {
-    const amount = Number(transaction.amount ?? transaction.sum ?? 0);
-    return total + amount;
+    const amount = Math.abs(Number(transaction.amount ?? transaction.sum ?? 0));
+
+    if (transaction.type === "INCOME") {
+      return total + amount;
+    }
+
+    if (transaction.type === "EXPENSE") {
+      return total - amount;
+    }
+
+    return total + Number(transaction.amount ?? transaction.sum ?? 0);
   }, 0);
 
 const transactionsSlice = createSlice({

@@ -91,7 +91,7 @@ export function LoginForm() {
           </h1>
         </div>
 
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
           <label className={styles.field}>
             <span className={styles.icon} aria-hidden="true">
               <svg width="20" height="16" viewBox="0 0 20 16" fill="none">

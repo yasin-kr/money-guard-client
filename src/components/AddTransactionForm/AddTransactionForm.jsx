@@ -46,7 +46,11 @@ const schema = yup.object({
 });
 
 function formatTransactionDate(date) {
-  return date.toISOString().slice(0, 10);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
 }
 
 export function AddTransactionForm({ onClose }) {
@@ -57,6 +61,9 @@ export function AddTransactionForm({ onClose }) {
   const categories = useSelector(selectCategories);
 
   const isLoadingCategories = useSelector(selectCategoriesLoading);
+  const incomeCategoryId = categories.find(
+    (category) => category.type === "INCOME",
+  )?.id;
 
   useEffect(() => {
     if (!categories.length) {
@@ -77,12 +84,13 @@ export function AddTransactionForm({ onClose }) {
   });
 
   async function onSubmit(data) {
+    const categoryId = type === "expense" ? data.category : incomeCategoryId;
     const finalData = {
       amount: Number(data.amount),
       transactionDate: formatTransactionDate(data.date),
       type: type === "income" ? "INCOME" : "EXPENSE",
       comment: data.comment,
-      ...(type === "expense" ? { categoryId: data.category } : {}),
+      categoryId,
     };
 
     try {
@@ -99,7 +107,7 @@ export function AddTransactionForm({ onClose }) {
   }
 
   return (
-    <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+    <form className={css.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <h2 className={css.title}>Add transaction</h2>
 
       <div className={css.switchWrapper}>

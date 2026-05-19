@@ -3,25 +3,29 @@
   max-height: 100%;
 }
 
-.table {
+.tableDesktop {
   width: 100%;
   border-collapse: collapse;
   color: white;
 }
 
-.table th {
+.tableDesktop th {
   text-align: left;
   padding: 12px 20px;
   font-weight: 600;
   opacity: 0.7;
 }
 
-.table td {
+.tableDesktop td {
   padding: 12px 20px;
 }
 
-.table tbody tr {
+.tableDesktop tbody tr {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cardsMobile {
+  display: none;
 }
 
 .empty {
@@ -32,7 +36,11 @@
 }
 
 @media (max-width: 767px) {
-  .table thead {
+  .tableDesktop {
     display: none;
+  }
+
+  .cardsMobile {
+    display: block;
   }
 }

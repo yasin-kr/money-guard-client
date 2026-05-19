@@ -3,7 +3,7 @@ import {
   selectSelectedMonth,
   selectSelectedYear,
 } from "../../redux/statistics/selectors";
-import { fetchSummary } from "../../redux/statistics/operations";
+import { setStatisticsPeriod } from "../../redux/statistics/slice";
 import css from "./StatisticsDashboard.module.css";
 
 const MONTHS = [
@@ -13,7 +13,10 @@ const MONTHS = [
 ];
 
 const currentYear = new Date().getFullYear();
-const YEARS = Array.from({ length: currentYear - 2019 }, (_, i) => currentYear - i);
+const YEARS = Array.from(
+  { length: currentYear - 2019 },
+  (_, i) => currentYear - i,
+);
 
 export function StatisticsDashboard() {
   const dispatch = useDispatch();
@@ -21,11 +24,21 @@ export function StatisticsDashboard() {
   const selectedYear = useSelector(selectSelectedYear);
 
   function handleMonthChange(e) {
-    dispatch(fetchSummary({ month: Number(e.target.value), year: selectedYear }));
+    dispatch(
+      setStatisticsPeriod({
+        month: Number(e.target.value),
+        year: selectedYear,
+      }),
+    );
   }
 
   function handleYearChange(e) {
-    dispatch(fetchSummary({ month: selectedMonth, year: Number(e.target.value) }));
+    dispatch(
+      setStatisticsPeriod({
+        month: selectedMonth,
+        year: Number(e.target.value),
+      }),
+    );
   }
 
   return (
@@ -35,6 +48,7 @@ export function StatisticsDashboard() {
           className={css.select}
           value={selectedMonth}
           onChange={handleMonthChange}
+          aria-label="Select statistics month"
         >
           {MONTHS.map((name, i) => (
             <option key={i + 1} value={i + 1}>
@@ -42,7 +56,7 @@ export function StatisticsDashboard() {
             </option>
           ))}
         </select>
-        <span className={css.chevron}>▾</span>
+        <span className={css.chevron}>v</span>
       </div>
 
       <div className={css.selectWrapper}>
@@ -50,6 +64,7 @@ export function StatisticsDashboard() {
           className={css.select}
           value={selectedYear}
           onChange={handleYearChange}
+          aria-label="Select statistics year"
         >
           {YEARS.map((year) => (
             <option key={year} value={year}>
@@ -57,7 +72,7 @@ export function StatisticsDashboard() {
             </option>
           ))}
         </select>
-        <span className={css.chevron}>▾</span>
+        <span className={css.chevron}>v</span>
       </div>
     </div>
   );
