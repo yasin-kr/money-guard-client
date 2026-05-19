@@ -1,17 +1,15 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// Path'ler projenin core mimarisine göre güncellendi
-import { fetchCurrency } from '../../redux/currency/operations';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCurrency } from "../../redux/currency/operations";
 import {
   selectCurrency,
-  selectIsLoading,
   selectCurrencyError,
-} from '../../redux/currency/selectors';
-// Loader importu feedback'e göre named export ({ Loader }) olarak düzeltildi
-import { Loader } from '../Loader/Loader';
-import styles from './Currency.module.css';
+  selectIsLoading,
+} from "../../redux/currency/selectors";
+import { Loader } from "../Loader/Loader";
+import styles from "./Currency.module.css";
 
-const CURRENCY_LABELS = { 840: 'USD', 978: 'EUR' };
+const CURRENCY_LABELS = { 840: "USD", 978: "EUR" };
 
 const Currency = () => {
   const dispatch = useDispatch();
@@ -19,7 +17,6 @@ const Currency = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectCurrencyError);
 
-  // localStorage karmaşası silindi, sadece core operation dispatch ediliyor
   useEffect(() => {
     dispatch(fetchCurrency());
   }, [dispatch]);
@@ -62,10 +59,11 @@ const Currency = () => {
             currency.map((item) => (
               <div className={styles.currencyRow} key={item.currencyCodeA}>
                 <span className={styles.currencyName}>
-                  {CURRENCY_LABELS[item.currencyCodeA] ?? String(item.currencyCodeA)}
+                  {CURRENCY_LABELS[item.currencyCodeA] ??
+                    String(item.currencyCodeA)}
                 </span>
-                <span>{item.rateBuy?.toFixed(2) ?? '-'}</span>
-                <span>{item.rateSell?.toFixed(2) ?? '-'}</span>
+                <span>{item.rateBuy?.toFixed(2) ?? "-"}</span>
+                <span>{item.rateSell?.toFixed(2) ?? "-"}</span>
               </div>
             ))
           )}

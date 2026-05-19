@@ -59,7 +59,12 @@ export default function App() {
         <Routes>
           <Route
             path="/"
-            element={<Navigate to={isLoggedIn ? "/home" : "/login"} replace />}
+            element={
+              <Navigate
+                to={isLoggedIn ? "/dashboard/home" : "/login"}
+                replace
+              />
+            }
           />
           <Route element={<RestrictedRoute />}>
             <Route path="/register" element={<RegistrationPage />} />
@@ -67,17 +72,20 @@ export default function App() {
           </Route>
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<DashboardPage />}>
-              <Route index element={<Navigate to="/home" replace />} />
-            </Route>
-            <Route element={<DashboardPage />}>
-              <Route path="/home" element={<HomeTab />} />
-              <Route path="/statistics" element={<StatisticsTab />} />
-              <Route path="/currency" element={<CurrencyTab />} />
+              <Route index element={<Navigate to="home" replace />} />
+              <Route path="home" element={<HomeTab />} />
+              <Route path="statistics" element={<StatisticsTab />} />
+              <Route path="currency" element={<CurrencyTab />} />
             </Route>
           </Route>
           <Route
             path="*"
-            element={<Navigate to={isLoggedIn ? "/home" : "/login"} replace />}
+            element={
+              <Navigate
+                to={isLoggedIn ? "/dashboard/home" : "/login"}
+                replace
+              />
+            }
           />
         </Routes>
       </Suspense>
