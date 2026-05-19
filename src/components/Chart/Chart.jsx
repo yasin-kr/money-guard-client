@@ -20,6 +20,14 @@ const COLORS = [
   "#00AD84", "#FFB627", "#FF7F7F", "#F4AD4C",
 ];
 
+function getCategoryName(category) {
+  return category.name || category.categoryName || "Other";
+}
+
+function getCategoryTotal(category) {
+  return Number(category.total ?? category.amount ?? category.sum ?? 0);
+}
+
 const options = {
   cutout: "70%",
   plugins: {
@@ -37,7 +45,7 @@ export function Chart() {
   const expenseTotal = useSelector(selectExpenseTotal);
 
   const expenseCategories = Array.isArray(categories)
-    ? categories.filter((c) => !c.type || c.type === "EXPENSE")
+    ? categories.filter((category) => !category.type || category.type === "EXPENSE")
     : [];
 
   if (expenseCategories.length === 0) {
@@ -51,20 +59,19 @@ export function Chart() {
   }
 
   const data = {
-    labels: expenseCategories.map((c) => c.name),
+    labels: expenseCategories.map((category) => getCategoryName(category)),
     datasets: [
       {
-        data: expenseCategories.map((c) => c.total),
+        data: expenseCategories.map((category) => getCategoryTotal(category)),
         backgroundColor: expenseCategories.map(
-          (_, i) => COLORS[i % COLORS.length]
+          (_, index) => COLORS[index % COLORS.length],
         ),
         borderWidth: 0,
       },
     ],
   };
 
-  const total =
-    typeof expenseTotal === "number" ? expenseTotal : 0;
+  const total = typeof expenseTotal === "number" ? expenseTotal : 0;
 
   return (
     <div className={css.wrapper}>
@@ -72,7 +79,8 @@ export function Chart() {
         <Doughnut data={data} options={options} />
         <div className={css.centerLabel}>
           <span className={css.totalAmount}>
-            ₴ {total.toFixed(2)}
+            {"\u20b4 "}
+            {total.toFixed(2)}
           </span>
         </div>
       </div>

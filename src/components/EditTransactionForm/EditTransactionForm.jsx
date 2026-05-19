@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,12 +12,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { FiCalendar } from "react-icons/fi";
 
 import css from "./EditTransactionForm.module.css";
-
-import {
-  selectCategories,
-  selectCategoriesLoading,
-} from "../../redux/categories/selectors";
-import { fetchCategories } from "../../redux/categories/operations";
 
 import { editTransaction } from "../../redux/transactions/operations";
 
@@ -37,31 +30,20 @@ const schema = yup.object({
     .typeError("Please select a valid date")
     .required("Date is required"),
 
-  category: yup.string().when("$type", {
-    is: "expense",
-    then: (schema) => schema.required("Category is required"),
-    otherwise: (schema) => schema.notRequired(),
-  }),
 });
 
 function formatTransactionDate(date) {
-  return date.toISOString().slice(0, 10);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
 }
 
 export function EditTransactionForm({ onClose, transaction }) {
   const type = transaction?.type === "INCOME" ? "income" : "expense";
 
   const dispatch = useDispatch();
-
-  const categories = useSelector(selectCategories);
-
-  const isLoadingCategories = useSelector(selectCategoriesLoading);
-
-  useEffect(() => {
-    if (type === "expense" && !categories.length) {
-      dispatch(fetchCategories());
-    }
-  }, [categories.length, dispatch, type]);
 
   const {
     register,
@@ -79,8 +61,6 @@ export function EditTransactionForm({ onClose, transaction }) {
 
       comment: transaction?.comment || "",
 
-      category: transaction?.categoryId || "",
-
       date: transaction?.transactionDate
         ? new Date(transaction.transactionDate)
         : null,
@@ -92,7 +72,6 @@ export function EditTransactionForm({ onClose, transaction }) {
       amount: Number(data.amount),
       transactionDate: formatTransactionDate(data.date),
       comment: data.comment,
-      ...(type === "expense" ? { categoryId: data.category } : {}),
     };
 
     try {
@@ -112,7 +91,7 @@ export function EditTransactionForm({ onClose, transaction }) {
   }
 
   return (
-    <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+    <form className={css.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <h2 className={css.title}>Edit transaction</h2>
 
       <div className={css.typeBox}>
@@ -126,28 +105,6 @@ export function EditTransactionForm({ onClose, transaction }) {
           Expense
         </span>
       </div>
-
-      {type === "expense" && (
-        <div className={css.field}>
-          {isLoadingCategories ? (
-            <p>Loading...</p>
-          ) : (
-            <select className={css.select} {...register("category")}>
-              <option value="">Select category</option>
-
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-          )}
-
-          {errors.category && (
-            <p className={css.error}>{errors.category.message}</p>
-          )}
-        </div>
-      )}
 
       <div className={css.row}>
         <div className={css.field}>

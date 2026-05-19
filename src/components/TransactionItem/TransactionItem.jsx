@@ -5,42 +5,84 @@ import { deleteTransaction } from "../../redux/transactions/operations";
 import ModalEditTransaction from "../ModalEditTransaction/ModalEditTransaction";
 import styles from "./TransactionItem.module.css";
 
-export function TransactionItem({ transaction }) {
+function formatDate(date) {
+  if (!date) {
+    return "-";
+  }
+
+  return new Date(date).toLocaleDateString("uk-UA");
+}
+
+function formatAmount(amount) {
+  return Number(amount || 0).toLocaleString("uk-UA", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+export function TransactionItem({ transaction, categoryName, variant = "row" }) {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isIncome = transaction.type === "INCOME";
+  const date = formatDate(transaction.transactionDate);
+  const amount = formatAmount(transaction.amount);
 
-  const handleDelete = () => {
-    dispatch(deleteTransaction(transaction.id));
+  const handleDelete = async () => {
+    try {
+      await dispatch(deleteTransaction(transaction.id)).unwrap();
+    } catch {
+      // Global error toast is handled in App.
+    }
   };
+
+  const modal = isModalOpen && (
+    <ModalEditTransaction
+      transaction={transaction}
+      onClose={() => setIsModalOpen(false)}
+    />
+  );
+
+  if (variant === "row") {
+    return (
+      <tr className={styles.row}>
+        <td>{date}</td>
+        <td>{isIncome ? "+" : "-"}</td>
+        <td>{categoryName}</td>
+        <td>{transaction.comment}</td>
+        <td className={isIncome ? styles.income : styles.expense}>{amount}</td>
+        <td>
+          <button
+            type="button"
+            className={styles.editBtn}
+            onClick={() => setIsModalOpen(true)}
+            aria-label="Edit transaction"
+          >
+            <MdEdit />
+          </button>
+          <button
+            type="button"
+            className={styles.deleteBtn}
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
+          {modal}
+        </td>
+      </tr>
+    );
+  }
 
   return (
     <>
-      {/* Desktop/Tablet - tablo satırı */}
-      <tr className={styles.row}>
-        <td>{transaction.transactionDate?.slice(0, 10)}</td>
-        <td>{isIncome ? "+" : "-"}</td>
-        <td>{transaction.categoryId}</td>
-        <td>{transaction.comment}</td>
-        <td className={isIncome ? styles.income : styles.expense}>
-          {transaction.amount}
-        </td>
-        <td>
-          <button type="button" className={styles.editBtn} onClick={() => setIsModalOpen(true)}>
-            <MdEdit />
-          </button>
-          <button type="button" className={styles.deleteBtn} onClick={handleDelete}>
-            Delete
-          </button>
-        </td>
-      </tr>
-
-      {/* Mobile - kart */}
-      <div className={`${styles.card} ${isIncome ? styles.cardIncome : styles.cardExpense}`}>
+      <div
+        className={`${styles.card} ${
+          isIncome ? styles.cardIncome : styles.cardExpense
+        }`}
+      >
         <div className={styles.cardRow}>
           <span className={styles.cardLabel}>Date</span>
-          <span>{transaction.transactionDate?.slice(0, 10)}</span>
+          <span>{date}</span>
         </div>
         <div className={styles.cardRow}>
           <span className={styles.cardLabel}>Type</span>
@@ -48,7 +90,7 @@ export function TransactionItem({ transaction }) {
         </div>
         <div className={styles.cardRow}>
           <span className={styles.cardLabel}>Category</span>
-          <span>{transaction.categoryId}</span>
+          <span>{categoryName}</span>
         </div>
         <div className={styles.cardRow}>
           <span className={styles.cardLabel}>Comment</span>
@@ -57,25 +99,28 @@ export function TransactionItem({ transaction }) {
         <div className={styles.cardRow}>
           <span className={styles.cardLabel}>Sum</span>
           <span className={isIncome ? styles.income : styles.expense}>
-            {transaction.amount}
+            {amount}
           </span>
         </div>
         <div className={styles.cardActions}>
-          <button type="button" className={styles.editBtn} onClick={() => setIsModalOpen(true)}>
+          <button
+            type="button"
+            className={styles.editBtn}
+            onClick={() => setIsModalOpen(true)}
+            aria-label="Edit transaction"
+          >
             <MdEdit />
           </button>
-          <button type="button" className={styles.deleteBtn} onClick={handleDelete}>
+          <button
+            type="button"
+            className={styles.deleteBtn}
+            onClick={handleDelete}
+          >
             Delete
           </button>
         </div>
       </div>
-
-      {isModalOpen && (
-        <ModalEditTransaction
-          transaction={transaction}
-          onClose={() => setIsModalOpen(false)}
-        />
-      )}
+      {modal}
     </>
   );
 }

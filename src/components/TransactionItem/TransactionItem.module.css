@@ -34,15 +34,7 @@
   font-size: 18px;
 }
 
-.card {
-  display: none;
-}
-
 @media (max-width: 767px) {
-  .row {
-    display: none;
-  }
-
   .card {
     display: flex;
     flex-direction: column;

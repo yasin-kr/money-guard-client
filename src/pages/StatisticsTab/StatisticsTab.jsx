@@ -17,7 +17,7 @@ export default function StatisticsTab() {
 
   useEffect(() => {
     dispatch(fetchSummary({ month: selectedMonth, year: selectedYear }));
-  }, [dispatch]);
+  }, [dispatch, selectedMonth, selectedYear]);
 
   return (
     <section className={css.statistics}>

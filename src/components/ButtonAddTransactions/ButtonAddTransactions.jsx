@@ -11,6 +11,7 @@ export function ButtonAddTransactions() {
         type="button"
         className={styles.button}
         onClick={() => setIsModalOpen(true)}
+        aria-label="Add transaction"
       >
         +
       </button>

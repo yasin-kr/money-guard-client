@@ -1,8 +1,19 @@
 import { TransactionItem } from "../TransactionItem/TransactionItem";
 import styles from "./TransactionsList.module.css";
 
-export function TransactionsList({ transactions, isLoading }) {
-  if (isLoading) return <p>Loading...</p>;
+function getCategoryName(categories, categoryId) {
+  if (!categoryId) {
+    return "Income";
+  }
+
+  return (
+    categories.find((category) => category.id === categoryId)?.name ||
+    "Other"
+  );
+}
+
+export function TransactionsList({ transactions, categories = [], isLoading }) {
+  if (isLoading) return <p className={styles.empty}>Loading...</p>;
 
   if (!transactions || transactions.length === 0) {
     return <p className={styles.empty}>You have no transactions yet</p>;
@@ -10,7 +21,7 @@ export function TransactionsList({ transactions, isLoading }) {
 
   return (
     <div className={styles.wrapper}>
-      <table className={styles.table}>
+      <table className={styles.tableDesktop}>
         <thead>
           <tr>
             <th>Date</th>
@@ -23,10 +34,26 @@ export function TransactionsList({ transactions, isLoading }) {
         </thead>
         <tbody>
           {transactions.map((transaction) => (
-            <TransactionItem key={transaction.id} transaction={transaction} />
+            <TransactionItem
+              key={transaction.id}
+              transaction={transaction}
+              categoryName={getCategoryName(categories, transaction.categoryId)}
+              variant="row"
+            />
           ))}
         </tbody>
       </table>
+
+      <div className={styles.cardsMobile}>
+        {transactions.map((transaction) => (
+          <TransactionItem
+            key={transaction.id}
+            transaction={transaction}
+            categoryName={getCategoryName(categories, transaction.categoryId)}
+            variant="card"
+          />
+        ))}
+      </div>
     </div>
   );
 }
