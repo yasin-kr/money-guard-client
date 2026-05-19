@@ -1,10 +1,8 @@
 import { useSelector } from "react-redux";
-// Hatalı finance path'i ekip standartına göre transactions/selectors olarak güncellendi
-import { selectBalance } from "../../redux/transactions/selectors"; 
+import { selectBalance } from "../../redux/transactions/selectors";
 import styles from "./Balance.module.css";
 
 const Balance = () => {
-  // Core yapıdaki selector kullanıldı
   const totalBalance = useSelector(selectBalance);
 
   const formattedBalance = new Intl.NumberFormat("uk-UA", {
@@ -16,7 +14,8 @@ const Balance = () => {
     <div className={styles.balanceCard}>
       <p className={styles.label}>YOUR BALANCE</p>
       <p className={styles.amount}>
-        <span className={styles.currencySymbol}>₴</span> {formattedBalance}
+        <span className={styles.currencySymbol}>{"\u20b4"}</span>{" "}
+        {formattedBalance}
       </p>
     </div>
   );

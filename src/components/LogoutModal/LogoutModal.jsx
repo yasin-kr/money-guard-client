@@ -1,7 +1,7 @@
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { logOut } from '../../redux/auth/operations'; // Projedeki logout operation yolu
-import styles from './LogoutModal.module.css';
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../../redux/auth/operations";
+import styles from "./LogoutModal.module.css";
 
 const LogoutModal = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -9,28 +9,25 @@ const LogoutModal = ({ onClose }) => {
 
   const handleLogout = async () => {
     try {
-      // Önce backend'e istek atmayı deneriz
-      await dispatch(logOut()).unwrap();
-    } catch (error) {
-      // Backend hata verse bile konsola basıp çökmeyi engelliyoruz
-      console.error("Backend logout hatası, yine de çıkış yapılıyor:", error);
+      await dispatch(logoutUser()).unwrap();
+    } catch {
+      // Global toast handles backend logout errors.
     } finally {
-      // Ekip liderinin istediği tam olarak burası:
-      // Backend'den ne dönerse dönsün kullanıcıyı login'e atıp state'i temizletiyoruz
-      navigate('/login');
+      localStorage.clear();
+      navigate("/login", { replace: true });
       onClose();
     }
   };
 
   return (
     <div className={styles.backdrop} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.modal} onClick={(event) => event.stopPropagation()}>
         <p className={styles.text}>Are you sure you want to log out?</p>
         <div className={styles.btnGroup}>
-          <button className={styles.logoutBtn} onClick={handleLogout}>
+          <button className={styles.logoutBtn} type="button" onClick={handleLogout}>
             Logout
           </button>
-          <button className={styles.cancelBtn} onClick={onClose}>
+          <button className={styles.cancelBtn} type="button" onClick={onClose}>
             Cancel
           </button>
         </div>

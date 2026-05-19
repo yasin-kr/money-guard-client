@@ -1,14 +1,15 @@
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { selectUsername } from '../../redux/auth/selectors';
+import { selectUser } from '../../redux/auth/selectors';
 import LogoutModal from '../LogoutModal/LogoutModal';
-import { IoIosLogOut } from 'react-icons/io'; // Exit ikonu
+import { IoIosLogOut } from 'react-icons/io';
 import styles from './Header.module.css';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const username = useSelector(selectUsername) || 'User';
+  const user = useSelector(selectUser);
+  const username = user?.email?.split('@')[0] || 'User';
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -23,7 +24,7 @@ const Header = () => {
       <header className={styles.header}>
         <div className={styles.container}>
           <Link to="/dashboard/home" className={styles.logoWrap}>
-            {/* Logo yerine metin veya bir div ikon */}
+            <span className={styles.logoMark} aria-hidden="true">MG</span>
             <span className={styles.logoText}>Money Guard</span>
           </Link>
 
@@ -34,6 +35,7 @@ const Header = () => {
               className={styles.logoutBtn}
               onClick={() => setIsModalOpen(true)}
               aria-label="Logout"
+              type="button"
             >
               <IoIosLogOut className={styles.exitIcon} />
               <span className={styles.exitText}>Exit</span>
