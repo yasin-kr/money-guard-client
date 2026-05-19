@@ -86,7 +86,10 @@ export function AddTransactionForm({ onClose }) {
   async function onSubmit(data) {
     const categoryId = type === "expense" ? data.category : incomeCategoryId;
     const finalData = {
-      amount: Number(data.amount),
+      amount:
+        type === "expense"
+          ? -Math.abs(Number(data.amount))
+          : Number(data.amount),
       transactionDate: formatTransactionDate(data.date),
       type: type === "income" ? "INCOME" : "EXPENSE",
       comment: data.comment,
