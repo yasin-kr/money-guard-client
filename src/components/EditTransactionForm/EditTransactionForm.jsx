@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Controller, useForm } from "react-hook-form";
@@ -17,6 +18,7 @@ import {
   selectCategories,
   selectCategoriesLoading,
 } from "../../redux/categories/selectors";
+import { fetchCategories } from "../../redux/categories/operations";
 
 import { editTransaction } from "../../redux/transactions/operations";
 
@@ -38,8 +40,13 @@ const schema = yup.object({
   category: yup.string().when("$type", {
     is: "expense",
     then: (schema) => schema.required("Category is required"),
+    otherwise: (schema) => schema.notRequired(),
   }),
 });
+
+function formatTransactionDate(date) {
+  return date.toISOString().slice(0, 10);
+}
 
 export function EditTransactionForm({ onClose, transaction }) {
   const type = transaction?.type === "INCOME" ? "income" : "expense";
@@ -49,6 +56,12 @@ export function EditTransactionForm({ onClose, transaction }) {
   const categories = useSelector(selectCategories);
 
   const isLoadingCategories = useSelector(selectCategoriesLoading);
+
+  useEffect(() => {
+    if (type === "expense" && !categories.length) {
+      dispatch(fetchCategories());
+    }
+  }, [categories.length, dispatch, type]);
 
   const {
     register,
@@ -76,8 +89,10 @@ export function EditTransactionForm({ onClose, transaction }) {
 
   async function onSubmit(data) {
     const finalData = {
-      ...data,
-      type,
+      amount: Number(data.amount),
+      transactionDate: formatTransactionDate(data.date),
+      comment: data.comment,
+      ...(type === "expense" ? { categoryId: data.category } : {}),
     };
 
     try {
@@ -91,8 +106,8 @@ export function EditTransactionForm({ onClose, transaction }) {
       reset();
 
       onClose();
-    } catch (error) {
-      console.error(error);
+    } catch {
+      // Global error toast is handled in App; keep the modal open for retry.
     }
   }
 
