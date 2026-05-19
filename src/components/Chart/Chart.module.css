@@ -1,0 +1,78 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.chartContainer {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centerLabel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.totalAmount {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 5px dashed rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.58);
+  text-align: center;
+  padding: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .chartContainer {
+    width: 300px;
+    height: 300px;
+  }
+
+  .empty {
+    width: 300px;
+    height: 300px;
+  }
+
+  .totalAmount {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .chartContainer {
+    width: 350px;
+    height: 350px;
+  }
+
+  .empty {
+    width: 350px;
+    height: 350px;
+  }
+
+  .totalAmount {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,99 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: white;
+  font-size: 14px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.colorDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.name {
+  flex: 1;
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sum {
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  white-space: nowrap;
+}
+
+.empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #a0a0a0;
+  font-size: 16px;
+  margin: 0;
+}
+
+.totals {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.totalLabel {
+  font-size: 14px;
+  color: white;
+}
+
+.expenseValue {
+  font-weight: 700;
+  font-size: 16px;
+  color: #f87171;
+}
+
+.incomeValue {
+  font-weight: 700;
+  font-size: 16px;
+  color: #ff9f40;
+}
