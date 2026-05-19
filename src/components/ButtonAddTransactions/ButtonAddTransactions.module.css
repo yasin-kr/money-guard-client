@@ -1,0 +1,18 @@
+.button {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(97.71deg, #ffc727 0%, #9e40ba 61.98%, #7000ff 91.46%);
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 9px 15px rgba(255, 199, 39, 0.4);
+  z-index: 100;
+}

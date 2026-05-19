@@ -1,6 +1,23 @@
-// Kisi 4 - ButtonAddTransactions
-// Kullanilacak component: ModalAddTransaction.
-// Bu buton sadece modal acma/kapama state'ini yonetir; API istegi form tarafinda yapilir.
+import { useState } from "react";
+import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction";
+import styles from "./ButtonAddTransactions.module.css";
+
 export function ButtonAddTransactions() {
-  return null;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <>
+      <button
+        type="button"
+        className={styles.button}
+        onClick={() => setIsModalOpen(true)}
+      >
+        +
+      </button>
+
+      {isModalOpen && (
+        <ModalAddTransaction onClose={() => setIsModalOpen(false)} />
+      )}
+    </>
+  );
 }
