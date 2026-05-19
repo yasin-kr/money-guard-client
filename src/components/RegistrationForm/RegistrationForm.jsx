@@ -32,71 +32,104 @@ const registrationSchema = yup.object().shape({
     .string()
     .required("Lütfen şifrenizi doğrulayınız")
     .oneOf([yup.ref("password"), null], "Şifreler birbirleriyle eşleşmiyor"),
-});  
+});
 
 export function RegistrationForm() {
   const dispatch = useDispatch();
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm({
-      resolver: yupResolver(registrationSchema),
-      mode: "onTouched"
-    });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(registrationSchema),
+    mode: "onTouched",
+  });
 
-
-  // şifre doğrulama için bar kontrolü  
-  const password = watch("password", "");
+  // şifre doğrulama için bar kontrolü
   const confirmPassword = watch("confirmPassword", "");
-
+  const password = watch("password", "");
   const getProgressWidth = () => {
-  if (!confirmPassword) return "0%"; 
-  if (password === confirmPassword) return "100%";
-  if (password.startsWith(confirmPassword)) {
-    const percentage = (confirmPassword.length / password.length) * 100;
-    return `${percentage}%`;
-  }
-  return "0%"; 
-};
+    if (!confirmPassword) return "0%";
+    if (password === confirmPassword) return "100%";
+    if (password.startsWith(confirmPassword)) {
+      const percentage = (confirmPassword.length / password.length) * 100;
+      return `${percentage}%`;
+    }
+    return "0%";
+  };
   const onFormSubmit = ({ name, email, password }) => {
     dispatch(registerUser({ username: name, email, password }));
   };
-  
+
   return (
     <div className={css.registerFormContainer}>
       <form className={css.registerForm} onSubmit={handleSubmit(onFormSubmit)}>
-
         <div className={css.inputContainer}>
-          <input className={css.inputField} placeholder="Name"type="text" {...register("name")} />
-          {errors.name && <p className={css.errorMessage}>{errors.name.message}</p>}
+          <input
+            className={css.inputField}
+            placeholder="Name"
+            type="text"
+            {...register("name")}
+          />
+          {errors.name && (
+            <p className={css.errorMessage}>{errors.name.message}</p>
+          )}
         </div>
 
         <div className={css.inputContainer}>
-          <input className={css.inputField} placeholder="Email" type="email" {...register("email")} />
-          {errors.email && <p className={css.errorMessage}>{errors.email.message}</p>}
+          <input
+            className={css.inputField}
+            placeholder="Email"
+            type="email"
+            {...register("email")}
+          />
+          {errors.email && (
+            <p className={css.errorMessage}>{errors.email.message}</p>
+          )}
         </div>
 
         <div className={css.inputContainer}>
-          <input className={css.inputField} placeholder="Password" type="password" {...register("password")} />
-          {errors.password && <p className={css.errorMessage}>{errors.password.message}</p>}
+          <input
+            className={css.inputField}
+            placeholder="Password"
+            type="password"
+            {...register("password")}
+          />
+          {errors.password && (
+            <p className={css.errorMessage}>{errors.password.message}</p>
+          )}
         </div>
 
         <div className={css.inputContainer}>
-          <input className={css.inputField} placeholder="Confirm Password" type="password" {...register("confirmPassword")} />
-          {errors.confirmPassword && <p className={css.errorMessage}>{errors.confirmPassword.message}</p>}
+          <input
+            className={css.inputField}
+            placeholder="Confirm Password"
+            type="password"
+            {...register("confirmPassword")}
+          />
+          {errors.confirmPassword && (
+            <p className={css.errorMessage}>{errors.confirmPassword.message}</p>
+          )}
         </div>
 
         <div className={css.passwordStrengthBar}>
-          <div className={css.passwordStrengthFill} style={{ width: getProgressWidth() }}></div>
+          <div
+            className={css.passwordStrengthFill}
+            style={{ width: getProgressWidth() }}
+          ></div>
         </div>
 
         <div className={css.buttonContainer}>
-          <button className={css.registerButton} type="submit">REGISTER</button>
-          <Link className={css.loginLink} to="/login">LOG IN</Link>
+          <button className={css.registerButton} type="submit">
+            REGISTER
+          </button>
+          <Link className={css.loginLink} to="/login">
+            LOG IN
+          </Link>
         </div>
-              
       </form>
     </div>
-  )
-
-  }
-
-
+  );
+}
