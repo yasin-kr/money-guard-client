@@ -56,8 +56,8 @@ export function RegistrationForm() {
   }
   return "0%"; 
 };
-  const onFormSubmit = (data) => {
-    dispatch(registerUser(data));
+  const onFormSubmit = ({ name, email, password }) => {
+    dispatch(registerUser({ username: name, email, password }));
   };
   
   return (
