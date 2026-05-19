@@ -12,3 +12,6 @@ export const selectTotalBalance = createSelector(
   [selectTransactions],
   (transactions) => calculateBalance(transactions),
 );
+
+// 🔥 Balance.jsx "selectBalance" bekliyor, dosyada "selectTotalBalance" var
+export const selectBalance = selectTotalBalance;

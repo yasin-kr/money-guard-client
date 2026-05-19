@@ -1,0 +1,54 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1200;
+}
+
+.modal {
+  background-color: var(
+    --bg-modal,
+    #ffffff
+  ); /* Projenin renk değişkenine göre güncelleyebilirsin */
+  padding: 40px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 380px;
+  width: 100%;
+}
+
+.text {
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+
+.btnGroup {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.logoutBtn,
+.cancelBtn {
+  padding: 13px 68px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.logoutBtn {
+  background-color: #ff6596;
+  color: #fff;
+}
+
+.cancelBtn {
+  background-color: #24cca7;
+  color: #fff;
+}

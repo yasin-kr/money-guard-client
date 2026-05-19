@@ -8,6 +8,10 @@ export const selectCurrencyLoading = (state) => state.currency.isLoading;
 export const selectCurrencyError = (state) => state.currency.error;
 export const selectCurrencyLastFetchedAt = (state) => state.currency.lastFetchedAt;
 
+// 🔥 Component'lerin beklediği isimler (alias)
+export const selectCurrency = selectCurrencyRates;
+export const selectIsLoading = selectCurrencyLoading;
+
 export const selectFormattedCurrencyRates = (state) =>
   state.currency.rates.map((rate) => ({
     ...rate,
@@ -15,3 +19,5 @@ export const selectFormattedCurrencyRates = (state) =>
     purchase: rate.rateBuy ?? rate.rateCross ?? 0,
     sale: rate.rateSell ?? rate.rateCross ?? 0,
   }));
+
+  

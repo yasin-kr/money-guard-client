@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrency } from '../../redux/finance/financeOperations';
+// Path'ler projenin core mimarisine göre güncellendi
+import { fetchCurrency } from '../../redux/currency/operations';
 import {
   selectCurrency,
   selectIsLoading,
   selectCurrencyError,
-} from '../../redux/finance/financeSelectors';
-import Loader from '../Loader/Loader';
+} from '../../redux/currency/selectors';
+// Loader importu feedback'e göre named export ({ Loader }) olarak düzeltildi
+import { Loader } from '../Loader/Loader';
 import styles from './Currency.module.css';
 
 const CURRENCY_LABELS = { 840: 'USD', 978: 'EUR' };
@@ -17,28 +19,10 @@ const Currency = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectCurrencyError);
 
+  // localStorage karmaşası silindi, sadece core operation dispatch ediliyor
   useEffect(() => {
-    const checkAndFetchCurrency = () => {
-      const localData = localStorage.getItem('currency_data');
-      const localTimestamp = localStorage.getItem('currency_timestamp');
-      const now = new Date().getTime();
-
-      if (localData && localTimestamp && now - Number(localTimestamp) < 3600000) {
-        return;
-      }
-
-      dispatch(fetchCurrency());
-    };
-
-    checkAndFetchCurrency();
+    dispatch(fetchCurrency());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (currency && currency.length > 0) {
-      localStorage.setItem('currency_data', JSON.stringify(currency));
-      localStorage.setItem('currency_timestamp', new Date().getTime().toString());
-    }
-  }, [currency]);
 
   if (isLoading) {
     return (
@@ -58,10 +42,6 @@ const Currency = () => {
     );
   }
 
-  const displayData = currency && currency.length > 0 
-    ? currency 
-    : JSON.parse(localStorage.getItem('currency_data') || '[]');
-
   return (
     <div className={styles.currencyWrapper}>
       <div className={styles.currencyTable}>
@@ -72,14 +52,14 @@ const Currency = () => {
         </div>
 
         <div className={styles.tableBody}>
-          {displayData.length === 0 ? (
+          {!currency || currency.length === 0 ? (
             <div className={styles.currencyRow}>
               <span>-</span>
               <span>-</span>
               <span>-</span>
             </div>
           ) : (
-            displayData.map((item) => (
+            currency.map((item) => (
               <div className={styles.currencyRow} key={item.currencyCodeA}>
                 <span className={styles.currencyName}>
                   {CURRENCY_LABELS[item.currencyCodeA] ?? String(item.currencyCodeA)}

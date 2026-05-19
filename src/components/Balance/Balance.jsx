@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux";
-import { selectTotalBalance } from "../../redux/finance/financeSelectors";
+// Hatalı finance path'i ekip standartına göre transactions/selectors olarak güncellendi
+import { selectBalance } from "../../redux/transactions/selectors"; 
 import styles from "./Balance.module.css";
 
 const Balance = () => {
-  const totalBalance = useSelector(selectTotalBalance);
+  // Core yapıdaki selector kullanıldı
+  const totalBalance = useSelector(selectBalance);
 
   const formattedBalance = new Intl.NumberFormat("uk-UA", {
     minimumFractionDigits: 2,

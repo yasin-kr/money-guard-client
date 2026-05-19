@@ -60,3 +60,5 @@ export const refreshUser = createAsyncThunk(
     }
   },
 );
+
+export const logOut = logoutUser;
