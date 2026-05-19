@@ -1,4 +1,6 @@
 .app {
   min-height: 100vh;
-  background: #f6f7fb;
+  background:
+    radial-gradient(circle at 16% 10%, rgba(115, 74, 239, 0.45), transparent 28%),
+    linear-gradient(160deg, #160d33 0%, #28135d 45%, #55228b 100%);
 }

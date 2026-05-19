@@ -36,11 +36,17 @@
 }
 
 @media (max-width: 767px) {
+  .wrapper {
+    overflow: visible;
+  }
+
   .tableDesktop {
     display: none;
   }
 
   .cardsMobile {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
 }

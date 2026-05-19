@@ -16,3 +16,13 @@
   box-shadow: 1px 9px 15px rgba(255, 199, 39, 0.4);
   z-index: 100;
 }
+
+@media (max-width: 767px) {
+  .button {
+    right: calc(50% - 160px + 20px);
+    bottom: 24px;
+    width: 52px;
+    height: 52px;
+    font-size: 32px;
+  }
+}

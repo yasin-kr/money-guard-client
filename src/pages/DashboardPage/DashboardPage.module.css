@@ -1,28 +1,21 @@
 .dashboardContainer {
   min-height: 100vh;
-  background-color: #f1f2f7; /* Arka plan rengi projenize göre değişebilir */
   display: flex;
   flex-direction: column;
+  background:
+    radial-gradient(circle at 14% 10%, rgba(115, 74, 239, 0.5), transparent 26%),
+    linear-gradient(160deg, #160d33 0%, #28135d 45%, #55228b 100%);
 }
 
 .mainWrapper {
   display: flex;
   flex-direction: column;
-  padding: 20px 20px;
-  gap: 20px;
   flex-grow: 1;
+  gap: 20px;
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-}
-
-/* Tablet ve Masaüstü için yan yana getirme */
-@media screen and (min-width: 768px) {
-  .mainWrapper {
-    flex-direction: row;
-    padding: 40px 32px;
-    gap: 32px;
-  }
+  padding: 20px;
 }
 
 .sidebar {
@@ -32,20 +25,61 @@
   width: 100%;
 }
 
-@media screen and (min-width: 768px) {
-  .sidebar {
-    width: 320px; /* Sol panelin sabit genişliği */
-    flex-shrink: 0;
-  }
-}
-
 .sidebarTop {
   display: flex;
   flex-direction: column;
   gap: 28px;
 }
 
-/* Tablette menü ve bakiyeyi yan yana getirmek istersen */
+.currencyWrap {
+  width: 100%;
+}
+
+.contentArea {
+  flex-grow: 1;
+  min-height: 400px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(22, 13, 51, 0.22);
+}
+
+@media screen and (max-width: 767px) {
+  .mainWrapper {
+    max-width: 375px;
+    padding: 16px 20px 88px;
+    gap: 24px;
+  }
+
+  .sidebar,
+  .sidebarTop {
+    gap: 14px;
+  }
+
+  .currencyWrap {
+    display: none;
+  }
+
+  .contentArea {
+    min-height: 0;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .mainWrapper {
+    flex-direction: row;
+    padding: 40px 32px;
+    gap: 32px;
+  }
+
+  .sidebar {
+    width: 320px;
+    flex-shrink: 0;
+  }
+}
+
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .sidebarTop {
     flex-direction: row;
@@ -53,23 +87,4 @@
     align-items: center;
     width: 100%;
   }
-}
-
-.currencyWrap {
-  width: 100%;
-}
-
-/* Tablette döviz tablosunu gizlemek ya da alta almak için projeye bakılabilir */
-@media screen and (max-width: 767px) {
-  .currencyWrap {
-    display: none; /* Mobilde genelde ayrı sekme olur */
-  }
-}
-
-.contentArea {
-  flex-grow: 1;
-  background-color: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  min-height: 400px;
 }

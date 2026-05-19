@@ -28,6 +28,11 @@
   height: 30px;
 }
 
+.logoIcon {
+  width: 30px;
+  height: 30px;
+}
+
 .logoMark {
   display: inline-flex;
   align-items: center;
@@ -97,16 +102,37 @@
 
 @media (max-width: 768px) {
   .header {
-    padding: 12px 0;
+    padding: 12px 0 10px;
+    background: linear-gradient(270deg, #2e1756 0%, #160d33 100%);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
+  }
+
+  .container {
+    max-width: 375px;
+    padding: 0 20px;
   }
 
   .logoText {
-    font-size: 18px;
+    font-size: 14px;
+    font-weight: 400;
   }
 
-  .logo {
-    width: 24px;
-    height: 24px;
+  .logoWrap {
+    gap: 6px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logoMark {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    font-size: 7px;
+  }
+
+  .logoIcon {
+    width: 18px;
+    height: 18px;
   }
 
   .exitText {
@@ -115,5 +141,22 @@
 
   .actions {
     gap: 8px;
+  }
+
+  .username {
+    font-size: 18px;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .logoutBtn {
+    padding: 0;
+  }
+
+  .exitIcon {
+    width: 20px;
+    height: 20px;
   }
 }

@@ -1,22 +1,22 @@
-import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { selectUser } from '../../redux/auth/selectors';
-import LogoutModal from '../LogoutModal/LogoutModal';
-import { IoIosLogOut } from 'react-icons/io';
-import styles from './Header.module.css';
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { selectUser } from "../../redux/auth/selectors";
+import LogoutModal from "../LogoutModal/LogoutModal";
+import { IoIosLogOut } from "react-icons/io";
+import styles from "./Header.module.css";
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const user = useSelector(selectUser);
-  const username = user?.email?.split('@')[0] || 'User';
+  const username = user?.email?.split("@")[0] || "User";
 
   useEffect(() => {
     const handleEsc = (e) => {
-      if (e.key === 'Escape') setIsModalOpen(false);
+      if (e.key === "Escape") setIsModalOpen(false);
     };
-    if (isModalOpen) window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
+    if (isModalOpen) window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
   }, [isModalOpen]);
 
   return (
@@ -24,7 +24,7 @@ const Header = () => {
       <header className={styles.header}>
         <div className={styles.container}>
           <Link to="/dashboard/home" className={styles.logoWrap}>
-            <span className={styles.logoMark} aria-hidden="true">MG</span>
+            <img className={styles.logoIcon} src="/favicon.svg" alt="" />
             <span className={styles.logoText}>Money Guard</span>
           </Link>
 
