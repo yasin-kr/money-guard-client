@@ -17,7 +17,9 @@ function getCategoryName(category) {
 }
 
 function getCategoryTotal(category) {
-  return Number(category.total ?? category.amount ?? category.sum ?? 0);
+  const total = Number(category.total ?? category.amount ?? category.sum ?? 0);
+
+  return Number.isFinite(total) ? Math.abs(total) : 0;
 }
 
 export function StatisticsTable() {
@@ -26,7 +28,10 @@ export function StatisticsTable() {
   const incomeTotal = useSelector(selectIncomeTotal);
 
   const expenseCategories = Array.isArray(categories)
-    ? categories.filter((c) => !c.type || c.type === "EXPENSE")
+    ? categories.filter(
+        (category) =>
+          !category.type || String(category.type).toUpperCase() === "EXPENSE",
+      )
     : [];
 
   const income =

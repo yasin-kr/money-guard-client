@@ -97,3 +97,46 @@
     background-color: #734aef;
   }
 }
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 0;
+  }
+
+  .link {
+    gap: 16px;
+    padding: 4px 0;
+  }
+
+  .navText {
+    display: inline;
+    color: #ffffff;
+    font-size: 18px;
+  }
+
+  .mobileCurrencyOnly {
+    display: none;
+  }
+
+  .iconWrap {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.28);
+  }
+
+  .icon {
+    width: 13px;
+    height: 13px;
+    color: #2f1b5f;
+    fill: #2f1b5f;
+  }
+
+  .activeLink .iconWrap {
+    background-color: #734aef;
+  }
+}

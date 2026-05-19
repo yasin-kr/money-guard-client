@@ -13,6 +13,7 @@ import {
 import { clearGlobalError } from "../../redux/global/slice";
 import { selectGlobalError } from "../../redux/global/selectors";
 import { Loader } from "../Loader/Loader";
+import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import css from "./App.module.css";
 
 const RegistrationPage = lazy(
@@ -51,11 +52,11 @@ export default function App() {
   }, [dispatch, globalError]);
 
   return isRefreshing ? (
-    <Loader />
+    <Loader force />
   ) : (
     <div className={css.app}>
       <Toaster position="top-right" />
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={null}>
         <Routes>
           <Route
             path="/"
@@ -78,15 +79,7 @@ export default function App() {
               <Route path="currency" element={<CurrencyTab />} />
             </Route>
           </Route>
-          <Route
-            path="*"
-            element={
-              <Navigate
-                to={isLoggedIn ? "/dashboard/home" : "/login"}
-                replace
-              />
-            }
-          />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
       <Loader />

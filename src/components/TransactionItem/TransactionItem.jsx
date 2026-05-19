@@ -111,6 +111,7 @@ export function TransactionItem({ transaction, categoryName, variant = "row" }) 
             aria-label="Edit transaction"
           >
             <MdEdit />
+            <span className={styles.editText}>Edit</span>
           </button>
           <button
             type="button"

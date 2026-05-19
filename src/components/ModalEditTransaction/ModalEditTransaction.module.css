@@ -6,9 +6,10 @@
   justify-content: center;
   align-items: center;
 
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(22, 13, 51, 0.42);
 
-  backdrop-filter: blur(100px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
   z-index: 1000;
 }
@@ -25,7 +26,11 @@
 
   overflow: hidden;
 
-  background: var(--form-color);
+  background: linear-gradient(
+    180deg,
+    rgba(83, 59, 143, 0.95) 0%,
+    rgba(80, 49, 156, 0.92) 100%
+  );
 
   box-shadow: 0 4px 60px rgba(0, 0, 0, 0.3);
 }
@@ -33,8 +38,8 @@
 .closeBtn {
   position: absolute;
 
-  top: 20px;
-  right: 20px;
+  top: 28px;
+  right: 28px;
 
   display: flex;
   justify-content: center;
@@ -42,8 +47,8 @@
 }
 
 .closeBtn > svg {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
 
   fill: #ffffff;
   color: #ffffff;
@@ -54,6 +59,11 @@
     max-width: 320px;
 
     padding: 20px;
+  }
+
+  .closeBtn {
+    top: 24px;
+    right: 24px;
   }
 }
 

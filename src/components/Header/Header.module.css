@@ -18,6 +18,7 @@
 
 .logoWrap {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 16px;
   text-decoration: none;
@@ -42,13 +43,13 @@
   border-radius: 8px;
   background: linear-gradient(135deg, #ffc727 0%, #734aef 100%);
   color: #ffffff;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 11px;
   font-weight: 700;
 }
 
 .logoText {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 22px;
   font-weight: 700;
   color: #ffffff;
@@ -61,7 +62,7 @@
 }
 
 .username {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.6);
@@ -91,10 +92,11 @@
 .exitIcon {
   width: 18px;
   height: 18px;
+  color: #ffffff99;
 }
 
 .exitText {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.6);
@@ -120,7 +122,6 @@
   .logoWrap {
     gap: 6px;
     flex-direction: column;
-    align-items: flex-start;
   }
 
   .logoMark {
@@ -158,5 +159,28 @@
   .exitIcon {
     width: 20px;
     height: 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+  }
+
+  .logoWrap {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .logoIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .logoText {
+    font-size: 16px;
+    font-weight: 400;
   }
 }

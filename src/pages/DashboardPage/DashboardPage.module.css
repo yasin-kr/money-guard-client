@@ -35,6 +35,10 @@
   width: 100%;
 }
 
+.hiddenOnCurrencyPage {
+  display: none;
+}
+
 .contentArea {
   flex-grow: 1;
   min-height: 400px;
@@ -65,6 +69,12 @@
     border-radius: 0;
     background: transparent;
   }
+
+  .currencyPage {
+    gap: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -78,13 +88,55 @@
     width: 320px;
     flex-shrink: 0;
   }
+
+  .currencyPage {
+    flex-direction: column;
+    max-width: 768px;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .currencyPage .sidebar {
+    width: 100%;
+  }
+
+  .currencyPage .sidebarTop {
+    align-items: center;
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
-  .sidebarTop {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  .mainWrapper {
+    flex-direction: column;
+    max-width: 768px;
+    padding: 24px 32px 64px;
+    gap: 20px;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 1fr);
+    align-items: stretch;
     width: 100%;
+    gap: 32px;
+  }
+
+  .sidebarTop {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .currencyWrap {
+    display: block;
+  }
+
+  .contentArea {
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
   }
 }

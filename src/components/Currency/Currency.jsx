@@ -4,9 +4,8 @@ import { fetchCurrency } from "../../redux/currency/operations";
 import {
   selectCurrency,
   selectCurrencyError,
-  selectIsLoading,
 } from "../../redux/currency/selectors";
-import { Loader } from "../Loader/Loader";
+import currencyChart from "../../img/currency.png";
 import styles from "./Currency.module.css";
 
 const CURRENCY_LABELS = { 840: "USD", 978: "EUR" };
@@ -14,22 +13,11 @@ const CURRENCY_LABELS = { 840: "USD", 978: "EUR" };
 const Currency = () => {
   const dispatch = useDispatch();
   const currency = useSelector(selectCurrency);
-  const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectCurrencyError);
 
   useEffect(() => {
     dispatch(fetchCurrency());
   }, [dispatch]);
-
-  if (isLoading) {
-    return (
-      <div className={styles.currencyWrapper}>
-        <div className={styles.loaderCenter}>
-          <Loader />
-        </div>
-      </div>
-    );
-  }
 
   if (error) {
     return (
@@ -70,7 +58,12 @@ const Currency = () => {
         </div>
       </div>
 
-      <div className={styles.chartWaveDecoration}></div>
+      <img
+        className={styles.currencyChart}
+        src={currencyChart}
+        alt=""
+        aria-hidden="true"
+      />
     </div>
   );
 };

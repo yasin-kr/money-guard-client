@@ -7,11 +7,10 @@
 .title {
   width: 100%;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 400;
   color: white;
   text-align: center;
-  margin-bottom: 2rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0 0 2rem;
 }
 
 .content {
@@ -30,7 +29,24 @@
 
 @media screen and (min-width: 768px) {
   .statistics {
-    padding: 0;
+    padding: 0 26px;
+  }
+
+  .title {
+    text-align: left;
+    font-size: 30px;
+    margin-bottom: 18px;
+  }
+
+  .content {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(260px, 1fr);
+    align-items: start;
+    gap: 24px;
+  }
+
+  .right {
+    gap: 18px;
   }
 }
 
@@ -40,13 +56,10 @@
   }
 
   .content {
-    flex-direction: row;
     gap: 40px;
-    align-items: flex-start;
   }
 
   .right {
-    flex: 1;
     min-width: 0;
   }
 }

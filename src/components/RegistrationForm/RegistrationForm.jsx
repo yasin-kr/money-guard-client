@@ -7,7 +7,7 @@
 
 import { registerUser } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
@@ -40,7 +40,7 @@ export function RegistrationForm() {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(registrationSchema),
@@ -48,8 +48,16 @@ export function RegistrationForm() {
   });
 
   // şifre doğrulama için bar kontrolü
-  const confirmPassword = watch("confirmPassword", "");
-  const password = watch("password", "");
+  const confirmPassword = useWatch({
+    control,
+    name: "confirmPassword",
+    defaultValue: "",
+  });
+  const password = useWatch({
+    control,
+    name: "password",
+    defaultValue: "",
+  });
   const getProgressWidth = () => {
     if (!confirmPassword) return "0%";
     if (password === confirmPassword) return "100%";
