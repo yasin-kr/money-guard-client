@@ -1,174 +1,102 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm, useWatch } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import PasswordStrengthBar from "react-password-strength-bar-with-style-item";
-import * as yup from "yup";
+// Kisi 1 - RegistrationForm
+// Kullanilacak Redux operation: registerUser from redux/auth/operations.
+// Kullanilacak Redux selector: selectAuthError gerekirse redux/auth/selectors.
+// Form: react-hook-form + Yup; alanlar name, email, password, confirmPassword.
+
+// ek olarak indirdiğim kütüphaneler: react-hook-form, yup, @hookform/resolvers
+
 import { registerUser } from "../../redux/auth/operations";
-import { selectIsLoading } from "../../redux/global/selectors";
+import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router-dom";
 import css from "./RegistrationForm.module.css";
 
-const registrationSchema = yup.object({
-  username: yup
+// Form doğrulama kuralları
+const registrationSchema = yup.object().shape({
+  name: yup
     .string()
-    .required("Name is required")
-    .min(3, "Name must be at least 3 characters"),
+    .required("Kullanıcı adı zorunludur")
+    .min(3, "Kullanıcı adı en az 3 karakter olmalıdır"),
   email: yup
     .string()
-    .required("Email is required")
-    .email("Please enter a valid email address"),
+    .required("Email zorunludur")
+    .email("Geçerli bir email adresi giriniz"),
   password: yup
     .string()
-    .required("Password is required")
-    .min(6, "Password must be at least 6 characters")
-    .max(12, "Password must be at most 12 characters"),
+    .required("Lütfen bir şifre giriniz")
+    .min(6, "Şifreniz en az 6 karakter olmalıdır")
+    .max(12, "Şifreniz en fazla 12 karakter olabilir"),
   confirmPassword: yup
     .string()
-    .required("Please confirm your password")
-    .oneOf([yup.ref("password")], "Passwords must match"),
-});
-
-function getProgressPassword(password, confirmPassword) {
-  if (!confirmPassword || !password.startsWith(confirmPassword)) {
-    return "";
-  }
-
-  return confirmPassword;
-}
+    .required("Lütfen şifrenizi doğrulayınız")
+    .oneOf([yup.ref("password"), null], "Şifreler birbirleriyle eşleşmiyor"),
+});  
 
 export function RegistrationForm() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isLoading = useSelector(selectIsLoading);
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(registrationSchema),
-    mode: "onTouched",
-  });
+  const { register, handleSubmit, watch, formState: { errors } } = useForm({
+      resolver: yupResolver(registrationSchema),
+      mode: "onTouched"
+    });
 
-  const password = useWatch({ control, name: "password", defaultValue: "" });
-  const confirmPassword = useWatch({
-    control,
-    name: "confirmPassword",
-    defaultValue: "",
-  });
-  const progressPassword = getProgressPassword(password, confirmPassword);
-  const passwordsMatch = Boolean(confirmPassword) && password === confirmPassword;
 
-  const onFormSubmit = async ({ username, email, password }) => {
-    try {
-      await dispatch(registerUser({ username, email, password })).unwrap();
-      navigate("/dashboard", { replace: true });
-    } catch {
-      // Global error toast is handled in App.
-    }
+  // şifre doğrulama için bar kontrolü  
+  const password = watch("password", "");
+  const confirmPassword = watch("confirmPassword", "");
+
+  const getProgressWidth = () => {
+  if (!confirmPassword) return "0%"; 
+  if (password === confirmPassword) return "100%";
+  if (password.startsWith(confirmPassword)) {
+    const percentage = (confirmPassword.length / password.length) * 100;
+    return `${percentage}%`;
+  }
+  return "0%"; 
+};
+  const onFormSubmit = (data) => {
+    dispatch(registerUser(data));
   };
-
+  
   return (
     <div className={css.registerFormContainer}>
-      <form
-        className={css.registerForm}
-        onSubmit={handleSubmit(onFormSubmit)}
-        noValidate
-      >
+      <form className={css.registerForm} onSubmit={handleSubmit(onFormSubmit)}>
+
         <div className={css.inputContainer}>
-          <input
-            className={css.inputField}
-            placeholder="Name"
-            type="text"
-            autoComplete="username"
-            {...register("username")}
-          />
-          {errors.username && (
-            <p className={css.errorMessage}>{errors.username.message}</p>
-          )}
+          <input className={css.inputField} placeholder="Name"type="text" {...register("name")} />
+          {errors.name && <p className={css.errorMessage}>{errors.name.message}</p>}
         </div>
 
         <div className={css.inputContainer}>
-          <input
-            className={css.inputField}
-            placeholder="Email"
-            type="email"
-            autoComplete="email"
-            {...register("email")}
-          />
-          {errors.email && (
-            <p className={css.errorMessage}>{errors.email.message}</p>
-          )}
+          <input className={css.inputField} placeholder="Email" type="email" {...register("email")} />
+          {errors.email && <p className={css.errorMessage}>{errors.email.message}</p>}
         </div>
 
         <div className={css.inputContainer}>
-          <input
-            className={css.inputField}
-            placeholder="Password"
-            type="password"
-            autoComplete="new-password"
-            {...register("password")}
-          />
-          {errors.password && (
-            <p className={css.errorMessage}>{errors.password.message}</p>
-          )}
+          <input className={css.inputField} placeholder="Password" type="password" {...register("password")} />
+          {errors.password && <p className={css.errorMessage}>{errors.password.message}</p>}
         </div>
 
         <div className={css.inputContainer}>
-          <input
-            className={css.inputField}
-            placeholder="Confirm Password"
-            type="password"
-            autoComplete="new-password"
-            {...register("confirmPassword")}
-          />
-          {errors.confirmPassword && (
-            <p className={css.errorMessage}>
-              {errors.confirmPassword.message}
-            </p>
-          )}
+          <input className={css.inputField} placeholder="Confirm Password" type="password" {...register("confirmPassword")} />
+          {errors.confirmPassword && <p className={css.errorMessage}>{errors.confirmPassword.message}</p>}
         </div>
 
-        <PasswordStrengthBar
-          className={css.passwordStrengthBar}
-          password={progressPassword}
-          minLength={1}
-          barColors={[
-            "rgba(255, 255, 255, 0.2)",
-            "#ff868d",
-            "#ffc727",
-            "#ffc727",
-            passwordsMatch ? "#24cca7" : "#ffc727",
-          ]}
-          scoreWords={["", "", "", "", ""]}
-          shortScoreWord=""
-          styleItem={{
-            height: 4,
-            borderRadius: 2,
-          }}
-          wrapStyle={{
-            margin: 0,
-            width: "100%",
-          }}
-          scoreWordStyle={{
-            display: "none",
-          }}
-        />
+        <div className={css.passwordStrengthBar}>
+          <div className={css.passwordStrengthFill} style={{ width: getProgressWidth() }}></div>
+        </div>
 
         <div className={css.buttonContainer}>
-          <button
-            className={css.registerButton}
-            type="submit"
-            disabled={isLoading}
-          >
-            {isLoading ? "LOADING..." : "REGISTER"}
-          </button>
-          <Link className={css.loginLink} to="/login">
-            LOG IN
-          </Link>
+          <button className={css.registerButton} type="submit">REGISTER</button>
+          <Link className={css.loginLink} to="/login">LOG IN</Link>
         </div>
+              
       </form>
     </div>
-  );
-}
+  )
+
+  }
+
+
