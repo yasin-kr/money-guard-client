@@ -1,0 +1,90 @@
+.row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.row td {
+  padding: 12px 20px;
+}
+
+.income {
+  color: #24cca7;
+}
+
+.expense {
+  color: #ff6596;
+}
+
+.deleteBtn {
+  background: linear-gradient(97.71deg, #ffc727 0%, #9e40ba 61.98%, #7000ff 91.46%);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.editBtn {
+  background: none;
+  border: none;
+  color: #ffc727;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.card {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .row {
+    display: none;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 8px;
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 5px solid transparent;
+  }
+
+  .cardIncome {
+    border-left-color: #ffc727;
+  }
+
+  .cardExpense {
+    border-left-color: #ff6596;
+  }
+
+  .cardRow {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cardLabel {
+    opacity: 0.6;
+  }
+
+  .cardActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .card .deleteBtn {
+    background: #ff6596;
+    border-radius: 20px;
+    padding: 6px 16px;
+    margin-left: 0;
+  }
+}
+
+
