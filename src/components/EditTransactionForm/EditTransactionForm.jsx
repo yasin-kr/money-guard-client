@@ -1,6 +1,7 @@
-import { useDispatch } from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import DatePicker from "react-datepicker";
@@ -14,6 +15,11 @@ import { FiCalendar } from "react-icons/fi";
 import css from "./EditTransactionForm.module.css";
 
 import { editTransaction } from "../../redux/transactions/operations";
+import {
+  selectCategories,
+  selectCategoriesLoading,
+} from "../../redux/categories/selectors";
+import { fetchCategories } from "../../redux/categories/operations";
 
 const schema = yup.object({
   amount: yup
@@ -30,6 +36,11 @@ const schema = yup.object({
     .typeError("Please select a valid date")
     .required("Date is required"),
 
+  category: yup.string().when("$type", {
+    is: "expense",
+    then: (schema) => schema.required("Category is required"),
+    otherwise: (schema) => schema.notRequired(),
+  }),
 });
 
 function formatTransactionDate(date) {
@@ -42,14 +53,44 @@ function formatTransactionDate(date) {
 
 export function EditTransactionForm({ onClose, transaction }) {
   const type = transaction?.type === "INCOME" ? "income" : "expense";
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const categoryDropdownRef = useRef(null);
 
   const dispatch = useDispatch();
+  const categories = useSelector(selectCategories);
+  const isLoadingCategories = useSelector(selectCategoriesLoading);
+  const expenseCategories = categories.filter(
+    (category) => category.type?.toUpperCase() === "EXPENSE",
+  );
+
+  useEffect(() => {
+    if (type === "expense" && !categories.length) {
+      dispatch(fetchCategories());
+    }
+  }, [categories.length, dispatch, type]);
+
+  useEffect(() => {
+    if (!isCategoryOpen) return undefined;
+
+    function handleOutsideClick(event) {
+      if (!categoryDropdownRef.current?.contains(event.target)) {
+        setIsCategoryOpen(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("pointerdown", handleOutsideClick);
+    };
+  }, [isCategoryOpen]);
 
   const {
     register,
     control,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -61,11 +102,21 @@ export function EditTransactionForm({ onClose, transaction }) {
 
       comment: transaction?.comment || "",
 
+      category: transaction?.categoryId || "",
+
       date: transaction?.transactionDate
         ? new Date(transaction.transactionDate)
         : null,
     },
   });
+  const selectedCategoryId = useWatch({
+    control,
+    name: "category",
+    defaultValue: transaction?.categoryId || "",
+  });
+  const selectedCategoryName =
+    expenseCategories.find((category) => category.id === selectedCategoryId)
+      ?.name || "Select category";
 
   async function onSubmit(data) {
     const amount = Math.abs(Number(data.amount));
@@ -73,6 +124,7 @@ export function EditTransactionForm({ onClose, transaction }) {
       amount: type === "expense" ? -amount : amount,
       transactionDate: formatTransactionDate(data.date),
       comment: data.comment,
+      ...(type === "expense" ? { categoryId: data.category } : {}),
     };
 
     try {
@@ -106,6 +158,61 @@ export function EditTransactionForm({ onClose, transaction }) {
           Expense
         </span>
       </div>
+
+      {type === "expense" && (
+        <div className={css.field} ref={categoryDropdownRef}>
+          {isLoadingCategories ? (
+            <p>Loading...</p>
+          ) : (
+            <>
+              <input type="hidden" {...register("category")} />
+              <button
+                className={css.categoryTrigger}
+                type="button"
+                onClick={() => setIsCategoryOpen((isOpen) => !isOpen)}
+              >
+                <span>{selectedCategoryName}</span>
+                <span
+                  className={`${css.categoryArrow} ${
+                    isCategoryOpen ? css.categoryArrowOpen : ""
+                  }`}
+                  aria-hidden="true"
+                ></span>
+              </button>
+
+              {isCategoryOpen && (
+                <ul className={css.categoryDropdown}>
+                  {expenseCategories.map((category) => (
+                    <li key={category.id}>
+                      <button
+                        className={`${css.categoryOption} ${
+                          category.id === selectedCategoryId
+                            ? css.categoryOptionActive
+                            : ""
+                        }`}
+                        type="button"
+                        onClick={() => {
+                          setValue("category", category.id, {
+                            shouldDirty: true,
+                            shouldValidate: true,
+                          });
+                          setIsCategoryOpen(false);
+                        }}
+                      >
+                        {category.name}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
+          )}
+
+          {errors.category && (
+            <p className={css.error}>{errors.category.message}</p>
+          )}
+        </div>
+      )}
 
       <div className={css.row}>
         <div className={css.field}>

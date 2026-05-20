@@ -51,7 +51,7 @@ export function TransactionItem({ transaction, categoryName, variant = "row" }) 
         <td>{categoryName}</td>
         <td>{transaction.comment}</td>
         <td className={isIncome ? styles.income : styles.expense}>{amount}</td>
-        <td>
+        <td className={styles.actionCell}>
           <button
             type="button"
             className={styles.editBtn}
