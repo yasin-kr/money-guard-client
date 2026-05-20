@@ -24,6 +24,18 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.tableDesktop thead {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.tableDesktop thead th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.tableDesktop thead th:last-child {
+  border-top-right-radius: 8px;
+}
+
 .cardsMobile {
   display: none;
 }

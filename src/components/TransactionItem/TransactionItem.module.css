@@ -7,6 +7,13 @@
   padding: 12px 20px;
 }
 
+.actionCell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
 .income {
   color: #24cca7;
 }
@@ -16,7 +23,6 @@
 }
 
 .deleteBtn {
-  margin-left: 8px;
   padding: 8px 20px;
   border: none;
   border-radius: 20px;
@@ -27,6 +33,9 @@
 }
 
 .editBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   background: none;
   color: #bfb3d7;

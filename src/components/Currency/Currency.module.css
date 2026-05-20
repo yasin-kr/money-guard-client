@@ -19,6 +19,8 @@
 }
 
 .currencyHeader {
+  position: relative;
+  z-index: 3;
   display: flex;
   justify-content: space-between;
   padding: 12px 30px;
@@ -27,6 +29,7 @@
   font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 600;
+  border-radius: 10px;
 }
 
 .currencyHeader span,
@@ -46,10 +49,11 @@
 }
 
 .tableBody {
+  margin-top: -10px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 16px 30px;
+  padding: 26px 30px 16px;
   background-color: transparent;
 }
 

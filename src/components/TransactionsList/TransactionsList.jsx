@@ -7,8 +7,7 @@ function getCategoryName(categories, categoryId) {
   }
 
   return (
-    categories.find((category) => category.id === categoryId)?.name ||
-    "Other"
+    categories.find((category) => category.id === categoryId)?.name || "Other"
   );
 }
 
