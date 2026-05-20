@@ -12,7 +12,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import { FaUser, FaRegEnvelope, FaLock } from "react-icons/fa";
-import logo from "../../../public/favicon.svg"
 import css from "./RegistrationForm.module.css";
 
 // Form doğrulama kuralları
@@ -70,7 +69,7 @@ export function RegistrationForm() {
       <form className={css.registerForm} onSubmit={handleSubmit(onFormSubmit)}>
 
         <div className={css.logoContainer}>
-          <img src={logo} alt="Money Guard Logo" className={css.logoImg} />
+          <img src="../../../public/favicon.svg" alt="Money Guard Logo" className={css.logoImg} />
           <h1 className={css.logoTitle}>Money Guard</h1>
         </div>
 
