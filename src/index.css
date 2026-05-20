@@ -65,7 +65,6 @@ ol {
 
 img,
 picture,
-svg,
 canvas {
   display: block;
   max-width: 100%;
