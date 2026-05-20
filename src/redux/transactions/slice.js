@@ -51,8 +51,19 @@ const transactionsSlice = createSlice({
         state.items.unshift(action.payload);
       })
       .addCase(editTransaction.fulfilled, (state, action) => {
+        const requestedTransaction = action.meta.arg.data || {};
+        const updatedTransaction = action.payload || {};
+        const transactionId = updatedTransaction.id || action.meta.arg.id;
+
         state.items = state.items.map((transaction) =>
-          transaction.id === action.payload.id ? action.payload : transaction,
+          transaction.id === transactionId
+            ? {
+                ...transaction,
+                ...updatedTransaction,
+                ...requestedTransaction,
+                id: transactionId,
+              }
+            : transaction,
         );
       })
       .addCase(deleteTransaction.fulfilled, (state, action) => {
