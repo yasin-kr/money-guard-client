@@ -11,27 +11,29 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
+import { FaUser, FaRegEnvelope, FaLock } from "react-icons/fa";
+import logo from "../../../public/favicon.svg"
 import css from "./RegistrationForm.module.css";
 
 // Form doğrulama kuralları
 const registrationSchema = yup.object().shape({
   name: yup
     .string()
-    .required("Kullanıcı adı zorunludur")
-    .min(3, "Kullanıcı adı en az 3 karakter olmalıdır"),
+    .required("Username is required")
+    .min(3, "The username must be at least 3 characters long."),
   email: yup
     .string()
-    .required("Email zorunludur")
-    .email("Geçerli bir email adresi giriniz"),
+    .required("Email is required")
+    .email("Please enter a valid email address."),
   password: yup
     .string()
-    .required("Lütfen bir şifre giriniz")
-    .min(6, "Şifreniz en az 6 karakter olmalıdır")
-    .max(12, "Şifreniz en fazla 12 karakter olabilir"),
+    .required("Please enter a password.")
+    .min(6, "Your password must be at least 6 characters long.")
+    .max(12, "Your password can be a maximum of 12 characters."),
   confirmPassword: yup
     .string()
-    .required("Lütfen şifrenizi doğrulayınız")
-    .oneOf([yup.ref("password"), null], "Şifreler birbirleriyle eşleşmiyor"),
+    .required("Please confirm your password.")
+    .oneOf([yup.ref("password"), null], "The passwords don't match."),
 });
 
 export function RegistrationForm() {
@@ -66,7 +68,14 @@ export function RegistrationForm() {
   return (
     <div className={css.registerFormContainer}>
       <form className={css.registerForm} onSubmit={handleSubmit(onFormSubmit)}>
+
+        <div className={css.logoContainer}>
+          <img src={logo} alt="Money Guard Logo" className={css.logoImg} />
+          <h1 className={css.logoTitle}>Money Guard</h1>
+        </div>
+
         <div className={css.inputContainer}>
+          <FaUser className={css.inputIcon} />
           <input
             className={css.inputField}
             placeholder="Name"
@@ -79,6 +88,7 @@ export function RegistrationForm() {
         </div>
 
         <div className={css.inputContainer}>
+          <FaRegEnvelope className={css.inputIcon} />
           <input
             className={css.inputField}
             placeholder="Email"
@@ -91,6 +101,7 @@ export function RegistrationForm() {
         </div>
 
         <div className={css.inputContainer}>
+          <FaLock className={css.inputIcon} />
           <input
             className={css.inputField}
             placeholder="Password"
@@ -103,6 +114,7 @@ export function RegistrationForm() {
         </div>
 
         <div className={css.inputContainer}>
+          <FaLock className={css.inputIcon} />
           <input
             className={css.inputField}
             placeholder="Confirm Password"
