@@ -68,8 +68,9 @@ export function EditTransactionForm({ onClose, transaction }) {
   });
 
   async function onSubmit(data) {
+    const amount = Math.abs(Number(data.amount));
     const finalData = {
-      amount: Number(data.amount),
+      amount: type === "expense" ? -amount : amount,
       transactionDate: formatTransactionDate(data.date),
       comment: data.comment,
     };

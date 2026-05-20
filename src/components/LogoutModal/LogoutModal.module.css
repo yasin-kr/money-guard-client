@@ -80,7 +80,7 @@
 @media screen and (max-width: 767px) {
   .backdrop {
     top: 58px;
-    z-index: 9;
+    z-index: 1200;
     height: calc(100vh - 58px);
     align-items: center;
     background:

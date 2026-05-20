@@ -67,7 +67,7 @@ export function AddTransactionForm({ onClose }) {
 
   const isLoadingCategories = useSelector(selectCategoriesLoading);
   const incomeCategoryId = categories.find(
-    (category) => category.type === "INCOME",
+    (category) => category.type?.toUpperCase() === "INCOME",
   )?.id;
 
   useEffect(() => {

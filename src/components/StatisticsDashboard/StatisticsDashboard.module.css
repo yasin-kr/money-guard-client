@@ -85,7 +85,7 @@
   color: #ff868d;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .select {
     min-width: 100px;
     height: 45px;

@@ -1,3 +1,5 @@
+@import "modern-normalize/modern-normalize.css";
+
 :root {
   --white: #fbfbfb;
   --ink: #ffffff;
@@ -12,7 +14,7 @@
   --coral: #ff7f7f;
   --gold: #ffb627;
   --orange: #f4ad4c;
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
   color: var(--ink);
   background:
     radial-gradient(circle at 20% 10%, rgba(115, 74, 239, 0.35), transparent 28%),
@@ -23,19 +25,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-}
-
 body {
-  margin: 0;
   min-width: 320px;
   min-height: 100vh;
   background:
@@ -43,43 +33,9 @@ body {
     linear-gradient(160deg, #160d33 0%, #2b1461 45%, #55228b 100%);
 }
 
-main {
-  display: block;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin: 0;
-}
-
-ul,
-ol {
-  margin: 0;
-  padding: 0;
-}
-
-img,
-picture,
-canvas {
-  display: block;
-  max-width: 100%;
-}
-
 a {
   color: currentColor;
   text-decoration: none;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
 }
 
 button {
@@ -88,19 +44,8 @@ button {
   background: transparent;
 }
 
-input,
-textarea,
-select {
-  color: inherit;
-}
-
 textarea {
   resize: vertical;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
 }
 
 #root {

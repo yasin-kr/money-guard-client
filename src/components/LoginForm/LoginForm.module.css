@@ -51,6 +51,7 @@
 
 .field:focus-within {
   border-bottom-color: #ffc727;
+  color: #ffc727;
 }
 
 .field + .field {
@@ -59,10 +60,13 @@
 
 .icon {
   width: 24px;
+  height: 24px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  font-size: 16px;
+  color: currentColor;
 }
 
 .input {
@@ -140,6 +144,7 @@
 
   .card {
     max-width: 533px;
+    min-height: 514px;
     padding: 80px 62px 62px;
     border-radius: 8px;
     background: rgba(82, 59, 126, 0.65);
@@ -149,6 +154,10 @@
 
   .logoArea {
     margin-bottom: 36px;
+  }
+
+  .field {
+    width: 409px;
   }
 
   .actions {
