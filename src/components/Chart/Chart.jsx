@@ -25,7 +25,9 @@ function getCategoryName(category) {
 }
 
 function getCategoryTotal(category) {
-  return Number(category.total ?? category.amount ?? category.sum ?? 0);
+  const total = Number(category.total ?? category.amount ?? category.sum ?? 0);
+
+  return Number.isFinite(total) ? Math.abs(total) : 0;
 }
 
 const options = {
@@ -34,7 +36,11 @@ const options = {
     legend: { display: false },
     tooltip: {
       callbacks: {
-        label: (ctx) => ` ${ctx.label}: ${ctx.parsed.toFixed(2)}`,
+        label: (ctx) => {
+          const value = Number(ctx.parsed);
+
+          return ` ${ctx.label}: ${Number.isFinite(value) ? value.toFixed(2) : "0.00"}`;
+        },
       },
     },
   },
@@ -45,10 +51,16 @@ export function Chart() {
   const expenseTotal = useSelector(selectExpenseTotal);
 
   const expenseCategories = Array.isArray(categories)
-    ? categories.filter((category) => !category.type || category.type === "EXPENSE")
+    ? categories.filter(
+        (category) =>
+          !category.type || String(category.type).toUpperCase() === "EXPENSE",
+      )
     : [];
+  const chartCategories = expenseCategories.filter(
+    (category) => getCategoryTotal(category) > 0,
+  );
 
-  if (expenseCategories.length === 0) {
+  if (chartCategories.length === 0) {
     return (
       <div className={css.wrapper}>
         <div className={css.empty}>
@@ -59,11 +71,11 @@ export function Chart() {
   }
 
   const data = {
-    labels: expenseCategories.map((category) => getCategoryName(category)),
+    labels: chartCategories.map((category) => getCategoryName(category)),
     datasets: [
       {
-        data: expenseCategories.map((category) => getCategoryTotal(category)),
-        backgroundColor: expenseCategories.map(
+        data: chartCategories.map((category) => getCategoryTotal(category)),
+        backgroundColor: chartCategories.map(
           (_, index) => COLORS[index % COLORS.length],
         ),
         borderWidth: 0,

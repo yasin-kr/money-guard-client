@@ -12,6 +12,7 @@ import {
 import { authReducer } from "./auth/slice";
 import { categoriesReducer } from "./categories/slice";
 import { currencyReducer } from "./currency/slice";
+import { financeReducer } from "./finance/slice";
 import { globalReducer } from "./global/slice";
 import { statisticsReducer } from "./statistics/slice";
 import { transactionsReducer } from "./transactions/slice";
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   categories: categoriesReducer,
   statistics: statisticsReducer,
   currency: currencyReducer,
+  finance: financeReducer,
   global: globalReducer,
 });
 

@@ -57,7 +57,7 @@ export function EditTransactionForm({ onClose, transaction }) {
     context: { type },
 
     defaultValues: {
-      amount: Math.abs(transaction?.amount || 0),
+      amount: Math.abs(transaction?.amount || 0).toFixed(2),
 
       comment: transaction?.comment || "",
 
@@ -68,8 +68,9 @@ export function EditTransactionForm({ onClose, transaction }) {
   });
 
   async function onSubmit(data) {
+    const amount = Math.abs(Number(data.amount));
     const finalData = {
-      amount: Number(data.amount),
+      amount: type === "expense" ? -amount : amount,
       transactionDate: formatTransactionDate(data.date),
       comment: data.comment,
     };
@@ -111,6 +112,7 @@ export function EditTransactionForm({ onClose, transaction }) {
           <input
             className={css.input}
             type="number"
+            step="0.01"
             placeholder="0.00"
             {...register("amount")}
           />

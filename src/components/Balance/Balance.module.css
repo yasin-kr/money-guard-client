@@ -37,15 +37,15 @@
 }
 
 /* 📱 RESPONSIVE: MOBİL UYUMLULUK */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .balanceCard {
     max-width: 100%;
-    padding: 8px 32px;
-    border-radius: 0px;
-    background: rgba(82, 59, 126, 0.4);
+    padding: 12px 32px 20px;
+    border-radius: 8px;
+    background: rgba(82, 59, 126, 0.7);
   }
 
   .amount {
-    font-size: 24px;
+    font-size: 30px;
   }
 }

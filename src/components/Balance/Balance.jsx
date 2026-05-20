@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { selectBalance } from "../../redux/transactions/selectors";
+import { selectTotalBalance } from "../../redux/finance/selectors";
 import styles from "./Balance.module.css";
 
 const Balance = () => {
-  const totalBalance = useSelector(selectBalance);
+  const totalBalance = useSelector(selectTotalBalance);
 
   const formattedBalance = new Intl.NumberFormat("uk-UA", {
     minimumFractionDigits: 2,

@@ -7,7 +7,7 @@
 
 import { registerUser } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
@@ -41,7 +41,7 @@ export function RegistrationForm() {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(registrationSchema),
@@ -49,8 +49,16 @@ export function RegistrationForm() {
   });
 
   // şifre doğrulama için bar kontrolü
-  const confirmPassword = watch("confirmPassword", "");
-  const password = watch("password", "");
+  const confirmPassword = useWatch({
+    control,
+    name: "confirmPassword",
+    defaultValue: "",
+  });
+  const password = useWatch({
+    control,
+    name: "password",
+    defaultValue: "",
+  });
   const getProgressWidth = () => {
     if (!confirmPassword) return "0%";
     if (password === confirmPassword) return "100%";
@@ -69,7 +77,7 @@ export function RegistrationForm() {
       <form className={css.registerForm} onSubmit={handleSubmit(onFormSubmit)}>
 
         <div className={css.logoContainer}>
-          <img src="../../../public/favicon.svg" alt="Money Guard Logo" className={css.logoImg} />
+          <img src="/favicon.svg" alt="Money Guard Logo" className={css.logoImg} />
           <h1 className={css.logoTitle}>Money Guard</h1>
         </div>
 

@@ -6,6 +6,8 @@
 
 .title {
   margin: 0;
+  padding-right: 44px;
+  padding-left: 44px;
 
   text-align: center;
 
@@ -86,6 +88,18 @@
 
 .input::placeholder {
   color: rgba(255, 255, 255, 0.6);
+}
+
+.input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .select {

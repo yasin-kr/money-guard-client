@@ -4,17 +4,41 @@ export const selectSelectedYear = (state) => state.statistics.selectedYear;
 export const selectStatisticsLoading = (state) => state.statistics.isLoading;
 export const selectStatisticsError = (state) => state.statistics.error;
 
-export const selectExpenseCategories = (state) =>
-  state.statistics.summary?.categoriesSummary ||
-  state.statistics.summary?.expenseSummary ||
-  [];
+const EMPTY_SUMMARY = {};
+const EMPTY_CATEGORIES = [];
+
+const toNumber = (value) => {
+  const numericValue = Number(value);
+
+  return Number.isFinite(numericValue) ? numericValue : 0;
+};
+
+const getSummary = (state) => state.statistics.summary || EMPTY_SUMMARY;
+
+export const selectExpenseCategories = (state) => {
+  const summary = getSummary(state);
+  const categories =
+    summary.categoriesSummary ||
+    summary.expensesSummary ||
+    summary.expenseCategories;
+
+  return Array.isArray(categories) ? categories : EMPTY_CATEGORIES;
+};
 
 export const selectIncomeTotal = (state) =>
-  state.statistics.summary?.incomeSummary ||
-  state.statistics.summary?.incomeTotal ||
-  0;
+  toNumber(
+    getSummary(state).incomeSummary ||
+      getSummary(state).incomeTotal ||
+      getSummary(state).incomesSummary ||
+      0,
+  );
 
 export const selectExpenseTotal = (state) =>
-  state.statistics.summary?.expenseSummary ||
-  state.statistics.summary?.expenseTotal ||
-  0;
+  Math.abs(
+    toNumber(
+      getSummary(state).expenseSummary ||
+        getSummary(state).expenseTotal ||
+        getSummary(state).expensesSummary ||
+        0,
+    ),
+  );

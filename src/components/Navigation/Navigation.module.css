@@ -11,20 +11,13 @@
   align-items: center;
   gap: 20px;
   padding: 12px 20px;
+  color: #ffffff;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-weight: 400;
-  /* Beyaz arka planda görünmesi için rengi koyu gri/mor tonuna çektik */
-  color: #4a56a9;
   border-radius: 8px;
   transition: all 0.3s ease;
-}
-
-.link:hover {
-  /* Hover durumunda projenin ana mor rengine yaklaşsın */
-  color: #734aef;
-  background-color: rgba(115, 74, 239, 0.05);
 }
 
 .iconWrap {
@@ -34,30 +27,25 @@
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  /* İkon arkasındaki hafif şeffaf kutuyu koyulaştırdık */
-  background-color: rgba(115, 74, 239, 0.1);
+  background-color: rgba(255, 255, 255, 0.16);
   transition: all 0.3s ease;
 }
 
 .icon {
   width: 18px;
   height: 18px;
-  /* SVG ikonların rengi */
-  color: #734aef;
-  fill: #734aef;
+  color: rgba(255, 255, 255, 0.72);
+  fill: rgba(255, 255, 255, 0.72);
   transition: all 0.3s ease;
 }
 
-/* Aktif (Seçili) Menü Elemanı Stilleri */
 .activeLink {
   font-weight: 700;
-  color: #4a56a9;
-  background-color: rgba(115, 74, 239, 0.15);
 }
 
 .activeLink .iconWrap {
   background-color: #734aef;
-  box-shadow: 0px 3px 10px rgba(115, 74, 239, 0.4);
+  box-shadow: 0 0 18px rgba(115, 74, 239, 0.75);
 }
 
 .activeLink .icon {
@@ -69,22 +57,20 @@
   display: none;
 }
 
-/* Kırılma noktasını 768px yerine 1024px yaparak tabletleri de kapsama alanına aldık kanka */
-@media (max-width: 1024px) {
+@media (max-width: 767px) {
   .nav {
     flex-direction: row;
-    justify-content: flex-start; /* Sola yaslı veya center yapabilirsin */
-    gap: 32px;
-    width: 100%;
-    padding: 12px 0;
+    justify-content: center;
+    gap: 38px;
+    padding: 2px 0 0;
   }
 
   .link {
-    padding: 8px;
     gap: 0;
+    padding: 8px;
+    background: transparent;
   }
 
-  /* Tablet ve mobilde metinleri gizle, sadece ikonlar kalsın */
   .navText {
     display: none;
   }
@@ -96,10 +82,61 @@
   .iconWrap {
     width: 44px;
     height: 44px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.55);
   }
 
   .icon {
     width: 24px;
     height: 24px;
+    color: #2f1b5f;
+    fill: #2f1b5f;
+  }
+
+  .activeLink .iconWrap {
+    background-color: #734aef;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 0;
+  }
+
+  .link {
+    gap: 16px;
+    padding: 4px 0;
+  }
+
+  .navText {
+    display: inline;
+    color: #ffffff;
+    font-size: 18px;
+  }
+
+  .mobileCurrencyOnly {
+    display: none;
+  }
+
+  .iconWrap {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.28);
+  }
+
+  .icon {
+    width: 13px;
+    height: 13px;
+    color: #2f1b5f;
+    fill: #2f1b5f;
+  }
+
+  .activeLink .iconWrap {
+    background-color: #734aef;
   }
 }
